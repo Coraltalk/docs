@@ -69,6 +69,11 @@
           "icon": "sparkles"
         },
         {
+          "anchor": "Feature Requests",
+          "href": "https://coraltalk-ai.canny.io/",
+          "icon": "lightbulb"
+        },
+        {
           "anchor": "Book a demo",
           "href": "https://coraltalk.com/demo-req",
           "icon": "calendar"
