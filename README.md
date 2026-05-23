@@ -1,55 +1,73 @@
-# Mintlify Starter Kit
+# Coraltalk Documentation
 
-Use the starter kit to get your docs deployed and ready to customize.
+Customer-facing documentation for Coraltalk AI platform, built with Mintlify.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
-
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
-
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
-
-## AI-assisted writing
-
-Set up your AI coding tool to work with Mintlify:
+## Quick Start
 
 ```bash
-npx skills add https://mintlify.com/docs
-```
-
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
-
-See the [AI tools guides](/ai-tools) for tool-specific setup.
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
+# Install Mintlify CLI (if not already installed)
 npm i -g mint
-```
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
+# Start local development server
 mint dev
+
+# Opens at http://localhost:3000
 ```
 
-View your local preview at `http://localhost:3000`.
+## Documentation Pages
 
-## Publishing changes
+### Getting Started (5 pages)
+- **index.mdx** — Welcome page and overview
+- **quickstart-coraltalk.mdx** — 5-minute quickstart for all user types
+- **getting-started/introduction.mdx** — Detailed introduction
+- **getting-started/for-teachers.mdx** — Complete teacher guide
+- **getting-started/for-students.mdx** — Complete student guide
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+### Teaching Assistant (1 page)
+- **teaching-assistant/customize-ta.mdx** — Configure Coral's personality and behavior
 
-## Need help?
+### Assessments (1 page)
+- **assessments/oral-assignments.mdx** — Create and manage AI-evaluated oral assessments
 
-### Troubleshooting
+### Integrations (1 page)
+- **integrations/canvas-integration.mdx** — Canvas LMS LTI 1.3 setup
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+### Help (1 page)
+- **troubleshooting/common-issues.mdx** — Comprehensive troubleshooting guide
 
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+## Total: 9 Pages
+
+All pages include:
+- Rich Mintlify components (Steps, Accordions, Tabs, Cards)
+- Cross-references to related guides
+- Practical examples and code samples
+- Clear navigation paths
+
+## Development Commands
+
+```bash
+mint dev              # Start dev server (http://localhost:3000)
+mint dev --port 3333  # Use custom port
+mint broken-links     # Check for broken links
+mint update           # Update Mintlify CLI
+```
+
+## Requirements
+
+- Node.js v19 or higher
+- Mintlify CLI
+
+## Configuration
+
+All settings in `docs.json`:
+- Navigation structure
+- Theme colors (cyan: #0E7490)
+- Logo and favicon
+- Global anchors (demo, app)
+- Social links
+
+## Support
+
+- **Email**: support@coraltalk.com
+- **App**: https://coraltalk.com
+- **Demo**: https://coraltalk.com/demo-req

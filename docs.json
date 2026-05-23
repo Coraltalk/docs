@@ -3,70 +3,48 @@
   "theme": "mint",
   "name": "Coraltalk AI",
   "colors": {
-    "primary": "#0E7490",
-    "light": "#22D3EE",
-    "dark": "#0E7490"
+    "primary": "#4400FF",
+    "light": "#6B21FF",
+    "dark": "#3300CC"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
         "groups": [
           {
             "group": "Getting started",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "quickstart-coraltalk",
+              "getting-started/introduction",
+              "getting-started/for-teachers",
+              "getting-started/for-students"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Teaching Assistant",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "teaching-assistant/customize-ta"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Assessments",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/components",
-              "essentials/reusable-snippets"
+              "assessments/oral-assignments"
             ]
           },
           {
-            "group": "Agent ready",
+            "group": "Integrations",
             "pages": [
-              "agent-ready/prompt",
-              "agent-ready/visibility",
-              "agent-ready/contextual",
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
+              "integrations/canvas-integration"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Help & Troubleshooting",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "troubleshooting/common-issues"
             ]
           }
         ]
@@ -75,14 +53,14 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Book a demo",
+          "href": "https://coraltalk.com/demo-req",
+          "icon": "calendar"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Go to app",
+          "href": "https://coraltalk.com",
+          "icon": "arrow-up-right-from-square"
         }
       ]
     }
@@ -95,7 +73,7 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:info@coraltalk.com"
+        "href": "mailto:support@coraltalk.com"
       }
     ],
     "primary": {
@@ -103,18 +81,6 @@
       "label": "Try for free",
       "href": "https://app.coraltalk.com/signup"
     }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
   },
   "footer": {
     "socials": {

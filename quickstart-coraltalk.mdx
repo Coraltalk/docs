@@ -1,0 +1,321 @@
+---
+title: "Coraltalk quickstart"
+description: "Get started with Coraltalk in 5 minutes"
+icon: "rocket"
+---
+
+Get up and running with Coraltalk quickly, whether you're a teacher, student, or administrator.
+
+## Choose your path
+
+<CardGroup cols={3}>
+  <Card title="I'm a teacher" icon="chalkboard-user" href="#teacher-quickstart">
+    Set up your first class and assignment
+  </Card>
+  
+  <Card title="I'm a student" icon="graduation-cap" href="#student-quickstart">
+    Join a class and complete assignments
+  </Card>
+  
+  <Card title="I'm an admin" icon="building-columns" href="#admin-quickstart">
+    Set up Canvas integration for your school
+  </Card>
+</CardGroup>
+
+---
+
+## Teacher quickstart
+
+### 5-minute setup
+
+<Steps>
+  <Step title="Create account (1 min)">
+    1. Go to [coraltalk.com](https://coraltalk.com)
+    2. Click **Sign up** → Choose **I'm an educator**
+    3. Sign up with email or Google
+  </Step>
+  
+  <Step title="Upload syllabus (1 min)">
+    1. Upload your course syllabus (PDF or DOCX)
+    2. Coraltalk will analyze it to power your teaching assistant
+  </Step>
+  
+  <Step title="Create your first class (2 min)">
+    1. Name your class (e.g., "Biology 101 - Fall 2026")
+    2. Set language and basic settings
+    3. Click **Create class**
+  </Step>
+  
+  <Step title="Customize Coral (1 min)">
+    1. Click **Customize** in sidebar
+    2. Choose a voice for your TA
+    3. Write a short personality prompt (e.g., "You're an encouraging biology tutor who uses real-world examples")
+    4. Save
+  </Step>
+  
+  <Step title="Invite students">
+    1. Click **Copy student link** in sidebar
+    2. Share via email, Canvas, or your LMS
+  </Step>
+</Steps>
+
+<Tip>
+Your first class is ready! Students can now join and chat with Coral. Next: Create your first oral assignment.
+</Tip>
+
+### Create your first oral assignment (2 minutes)
+
+<Steps>
+  <Step title="Go to Oral Assessments">
+    Click **Oral Assessments** in sidebar → **New Oral Assignment**
+  </Step>
+  
+  <Step title="Add basic info">
+    - Title: "Chapter 1 Understanding Check"
+    - Instructions: "Explain the key concepts from Chapter 1 in your own words"
+  </Step>
+  
+  <Step title="Add questions">
+    Option A: Write your own (e.g., "Explain photosynthesis")
+    
+    Option B: Click **Generate with AI** to create questions from your materials
+  </Step>
+  
+  <Step title="Create rubric">
+    Add 2-3 criteria like:
+    - Conceptual understanding (4 points)
+    - Use of examples (3 points)
+    - Clarity of explanation (3 points)
+  </Step>
+  
+  <Step title="Publish">
+    Review and click **Publish** — Students can now see and complete it!
+  </Step>
+</Steps>
+
+### Next steps for teachers
+
+<CardGroup cols={2}>
+  <Card title="Full teacher guide" icon="book" href="/getting-started/for-teachers">
+    Complete setup and features
+  </Card>
+  
+  <Card title="Customize your TA" icon="sliders" href="/teaching-assistant/customize-ta">
+    Advanced personality and settings
+  </Card>
+  
+  <Card title="Oral assignments" icon="microphone" href="/assessments/oral-assignments">
+    Deep dive into assessments
+  </Card>
+  
+  <Card title="Canvas integration" icon="link" href="/integrations/canvas-integration">
+    Connect with Canvas LMS
+  </Card>
+</CardGroup>
+
+---
+
+## Student quickstart
+
+### Join a class (1 minute)
+
+<Steps>
+  <Step title="Get your class link">
+    Your teacher will send you a class link or class code
+  </Step>
+  
+  <Step title="Create account">
+    1. Click the class link
+    2. If you don't have an account: **Sign up** → Choose **I'm a student**
+    3. Sign up with email or Google
+  </Step>
+  
+  <Step title="Join the class">
+    You'll automatically join after creating your account
+  </Step>
+</Steps>
+
+<Info>
+If your school uses Canvas, you can launch Coraltalk directly from your Canvas course — no separate login needed!
+</Info>
+
+### Complete your first oral assignment
+
+<Steps>
+  <Step title="Open the assignment">
+    Click on an assignment from **Oral Learning** section
+  </Step>
+  
+  <Step title="Allow microphone">
+    Your browser will ask for permission — click **Allow**
+  </Step>
+  
+  <Step title="Have the conversation">
+    - Coral will ask you questions
+    - Speak naturally and clearly
+    - Answer follow-up questions
+  </Step>
+  
+  <Step title="Submit">
+    Click **Submit** when finished
+  </Step>
+  
+  <Step title="Wait for feedback">
+    Coral will evaluate your responses (takes a few minutes)
+  </Step>
+</Steps>
+
+### Chat with Coral (your teaching assistant)
+
+1. Click **Chat with Coral** in your class
+2. Ask questions about course material
+3. Get instant answers based on your syllabus
+
+<Warning>
+Coral helps you learn, but won't complete assignments for you. Use it for understanding concepts and studying!
+</Warning>
+
+### Next steps for students
+
+<CardGroup cols={2}>
+  <Card title="Full student guide" icon="book" href="/getting-started/for-students">
+    Complete features and tips
+  </Card>
+  
+  <Card title="Troubleshooting" icon="wrench" href="/troubleshooting/common-issues">
+    Fix common issues
+  </Card>
+</CardGroup>
+
+---
+
+## Admin quickstart
+
+### Set up Canvas LMS integration (15 minutes)
+
+<Info>
+This requires Canvas administrator access. Individual teachers can also set this up at the course level if permitted.
+</Info>
+
+<Steps>
+  <Step title="Get Coraltalk credentials">
+    1. Create a Coraltalk organization at [coraltalk.com](https://coraltalk.com)
+    2. Contact support@coraltalk.com for LTI credentials:
+       - Client ID
+       - Deployment ID
+       - LTI configuration JSON
+  </Step>
+  
+  <Step title="Create Developer Key in Canvas">
+    1. Canvas Admin → **Developer Keys** → **+ LTI Key**
+    2. Name: "Coraltalk"
+    3. Redirect URIs: `https://coraltalk.com/api/lti/callback`
+    4. Paste JSON configuration from Coraltalk
+    5. Save and toggle key to **ON**
+  </Step>
+  
+  <Step title="Add external app">
+    1. Settings → Apps → **+ App**
+    2. Configuration Type: **By Client ID**
+    3. Paste Client ID from developer key
+    4. Submit
+  </Step>
+  
+  <Step title="Configure in Coraltalk">
+    1. Log into Coraltalk org settings
+    2. Integrations → Canvas
+    3. Enter Canvas domain (e.g., `yourschool.instructure.com`)
+    4. Enter Client ID
+    5. Save and test
+  </Step>
+</Steps>
+
+### Teachers can now use Coraltalk in Canvas
+
+Once configured, teachers in your organization can:
+1. Add Coraltalk to their Canvas course navigation
+2. Create linked assignments that sync grades
+3. Students launch from Canvas with SSO
+
+### Next steps for admins
+
+<CardGroup cols={2}>
+  <Card title="Canvas integration guide" icon="book" href="/integrations/canvas-integration">
+    Detailed setup with screenshots
+  </Card>
+  
+  <Card title="Admin guide" icon="building-columns" href="/getting-started/for-school-admins">
+    Organization management
+  </Card>
+</CardGroup>
+
+---
+
+## Common first questions
+
+<AccordionGroup>
+  <Accordion title="How much does Coraltalk cost?">
+    Pricing varies by plan and organization size. Contact sales@coraltalk.com for:
+    - Individual teacher plans
+    - School/university pricing
+    - Enterprise options
+    
+    Most plans include a free trial period.
+  </Accordion>
+  
+  <Accordion title="What browsers work best?">
+    **Recommended**:
+    - Chrome (latest)
+    - Safari (latest)
+    - Edge (latest)
+    
+    Mobile browsers work but desktop is recommended for best experience.
+  </Accordion>
+  
+  <Accordion title="Can students use Coraltalk on phones?">
+    Yes, but the experience is optimized for desktop/laptop or tablets (iPad). 
+    
+    For oral assignments, we strongly recommend:
+    - Desktop or laptop
+    - Quiet environment
+    - Good internet connection (5+ Mbps)
+  </Accordion>
+  
+  <Accordion title="How long does evaluation take?">
+    Oral assignment evaluation typically takes **2-10 minutes** depending on:
+    - Length of conversation
+    - Complexity of rubric
+    - Current system load
+    
+    High-traffic periods (exam weeks) may take slightly longer.
+  </Accordion>
+  
+  <Accordion title="Can I try before committing?">
+    Yes! Most plans include:
+    - Free trial period
+    - Demo account for testing
+    - Pilot programs for schools
+    
+    Contact support@coraltalk.com to set up a trial.
+  </Accordion>
+</AccordionGroup>
+
+## Need help?
+
+<CardGroup cols={2}>
+  <Card title="Contact support" icon="envelope" href="mailto:support@coraltalk.com">
+    Email: support@coraltalk.com
+  </Card>
+  
+  <Card title="Troubleshooting" icon="life-ring" href="/troubleshooting/common-issues">
+    Common issues and solutions
+  </Card>
+  
+  <Card title="Book a demo" icon="calendar" href="https://coraltalk.com/demo-req">
+    Schedule a walkthrough
+  </Card>
+  
+  <Card title="Full documentation" icon="book" href="/getting-started/introduction">
+    Browse all guides
+  </Card>
+</CardGroup>

@@ -1,0 +1,317 @@
+---
+title: "Canvas LMS integration"
+description: "Connect Coraltalk with Canvas for seamless assignment launch and grade sync"
+icon: "link"
+---
+
+Coraltalk integrates with Canvas LMS through **LTI (Learning Tools Interoperability)**, allowing students to launch Coraltalk directly from Canvas and automatically sync grades.
+
+## Integration benefits
+
+<CardGroup cols={2}>
+  <Card title="Single sign-on" icon="right-to-bracket">
+    Students launch Coraltalk from Canvas without separate login
+  </Card>
+  
+  <Card title="Grade sync" icon="arrow-right-arrow-left">
+    Oral assignment grades automatically sync to Canvas gradebook
+  </Card>
+  
+  <Card title="Seamless workflow" icon="diagram-project">
+    Assignments appear in Canvas alongside other coursework
+  </Card>
+  
+  <Card title="Roster sync" icon="users">
+    Student enrollments automatically sync from Canvas
+  </Card>
+</CardGroup>
+
+## Setup overview
+
+There are two integration methods:
+
+<Tabs>
+  <Tab title="LTI 1.3 (Recommended)">
+    **Modern, secure LTI integration**
+    
+    - Most secure method
+    - Better performance
+    - Recommended for all new Canvas deployments
+    - Requires Canvas admin access
+    
+    [See LTI 1.3 setup guide](/integrations/canvas-lti)
+  </Tab>
+  
+  <Tab title="REST API">
+    **Alternative integration using Canvas API**
+    
+    - For schools that can't use LTI
+    - Requires Canvas API key
+    - Manual grade sync setup
+    
+    [See REST API setup guide](/integrations/canvas-rest-api)
+  </Tab>
+</Tabs>
+
+## Who should set this up?
+
+<AccordionGroup>
+  <Accordion title="School administrators (recommended)">
+    **Best for**: Multi-course deployments, school-wide adoption
+    
+    Admins set up LTI at the Canvas account level, making Coraltalk available to all instructors. Teachers then add it to individual courses.
+    
+    See [Guide for school administrators](/getting-started/for-school-admins)
+  </Accordion>
+  
+  <Accordion title="Individual teachers">
+    **Best for**: Single course pilots, independent use
+    
+    Teachers can set up LTI for their own Canvas course if they have instructor-level LTI permissions. May require IT approval.
+    
+    <Warning>Check with your IT department about LTI policies before attempting course-level setup</Warning>
+  </Accordion>
+</AccordionGroup>
+
+## Prerequisites
+
+Before starting integration:
+
+<Steps>
+  <Step title="Coraltalk account">
+    Create a Coraltalk school organization at [coraltalk.com](https://coraltalk.com)
+  </Step>
+  
+  <Step title="Canvas admin access">
+    You need Canvas administrator permissions or instructor LTI permissions
+  </Step>
+  
+  <Step title="Coraltalk credentials">
+    Contact Coraltalk support to receive your LTI credentials:
+    - Client ID
+    - Deployment ID
+    - LTI configuration URL
+  </Step>
+</Steps>
+
+## LTI 1.3 setup (Canvas admin)
+
+<Steps>
+  <Step title="Navigate to Developer Keys">
+    In Canvas:
+    1. Go to **Admin** → **Developer Keys**
+    2. Click **+ Developer Key** → **+ LTI Key**
+  </Step>
+  
+  <Step title="Configure key settings">
+    - **Key Name**: Coraltalk
+    - **Owner Email**: Your IT contact email
+    - **Redirect URIs**: `https://coraltalk.com/api/lti/callback`
+    - **Method**: Paste JSON configuration
+  </Step>
+  
+  <Step title="Paste LTI configuration">
+    Coraltalk support will provide a JSON configuration. Paste it into the configuration field.
+  </Step>
+  
+  <Step title="Save and enable">
+    1. Save the developer key
+    2. Toggle the key to **ON** state
+    3. Copy the Client ID (numeric value)
+  </Step>
+  
+  <Step title="Add external app">
+    In your Canvas account or course:
+    1. Go to **Settings** → **Apps** → **View App Configurations**
+    2. Click **+ App**
+    3. Configuration Type: **By Client ID**
+    4. Paste the Client ID from step 4
+    5. Submit
+  </Step>
+  
+  <Step title="Configure in Coraltalk">
+    1. Log into Coraltalk organization settings
+    2. Navigate to **Integrations** → **Canvas**
+    3. Enter your Canvas domain (e.g., `yourschool.instructure.com`)
+    4. Enter the Client ID
+    5. Save and test connection
+  </Step>
+</Steps>
+
+<Tip>
+For detailed step-by-step instructions with screenshots, see the [Canvas LTI setup guide](/integrations/canvas-lti)
+</Tip>
+
+## Using the integration (Teachers)
+
+Once LTI is configured, teachers can:
+
+### Add Coraltalk to Canvas course
+
+<Steps>
+  <Step title="Open Canvas course">
+    Navigate to your Canvas course
+  </Step>
+  
+  <Step title="Add to navigation">
+    1. Go to **Settings** → **Navigation**
+    2. Find **Coraltalk** in the hidden tools
+    3. Drag it to visible position
+    4. Save
+  </Step>
+  
+  <Step title="Launch from Canvas">
+    Click **Coraltalk** in your course navigation. First launch creates your Coraltalk class.
+  </Step>
+</Steps>
+
+### Create linked assignments
+
+<Steps>
+  <Step title="Create in Coraltalk">
+    Build your oral assignment in Coraltalk as usual
+  </Step>
+  
+  <Step title="Link to Canvas">
+    1. In Coraltalk assignment settings, click **Share to Canvas**
+    2. Choose the Canvas course
+    3. Set point value and due date
+    4. Publish
+  </Step>
+  
+  <Step title="Automatic grade sync">
+    When students complete the oral assignment, grades automatically sync to Canvas gradebook
+  </Step>
+</Steps>
+
+## Student experience
+
+<Steps>
+  <Step title="Launch from Canvas">
+    Student clicks **Coraltalk** link in Canvas course navigation
+  </Step>
+  
+  <Step title="Auto-enrollment">
+    Student is automatically enrolled in the Coraltalk class (first launch only)
+  </Step>
+  
+  <Step title="Complete assignment">
+    Student sees and completes oral assignments
+  </Step>
+  
+  <Step title="View grade in Canvas">
+    Grade appears in Canvas gradebook after evaluation completes
+  </Step>
+</Steps>
+
+<Info>
+Students never need to create a separate Coraltalk account — they're authenticated through Canvas SSO.
+</Info>
+
+## Grade sync behavior
+
+| Event | Canvas gradebook update |
+|-------|-------------------------|
+| Student submits oral assignment | "Submitted" status appears |
+| Coral completes evaluation | Numeric grade syncs automatically |
+| Teacher adjusts grade in Coraltalk | Updated grade syncs within 5 minutes |
+| Teacher hides grades in Coraltalk | Grade marked as "hidden" in Canvas |
+
+<Warning>
+Grade edits must be made in **Coraltalk**, not Canvas. Canvas is read-only for Coraltalk grades. Edits in Canvas will be overwritten.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Students can't launch from Canvas">
+    **Check**:
+    1. LTI key is enabled (ON state)
+    2. Coraltalk is in course navigation (Settings → Navigation)
+    3. Student is enrolled in Canvas course
+    4. Canvas domain matches what's configured in Coraltalk
+    
+    **Solution**: Try launching as instructor first to verify setup
+  </Accordion>
+  
+  <Accordion title="Grades not syncing">
+    **Check**:
+    1. Assignment was created with Canvas link enabled
+    2. Canvas gradebook column exists for the assignment
+    3. Grade is not hidden from students in Coraltalk settings
+    
+    **Solution**: Republish the assignment link from Coraltalk if needed
+  </Accordion>
+  
+  <Accordion title="LTI configuration error">
+    **Check**:
+    1. JSON configuration was pasted completely (no truncation)
+    2. Redirect URI matches exactly: `https://coraltalk.com/api/lti/callback`
+    3. Client ID in Coraltalk matches Canvas developer key
+    
+    **Solution**: Regenerate developer key and reconfigure
+  </Accordion>
+  
+  <Accordion title="Students see 'Access denied'">
+    **Possible causes**:
+    - Student isn't enrolled in Canvas course
+    - LTI launch URL is incorrect
+    - Session expired
+    
+    **Solution**: Have student log out of Canvas, log back in, and try again
+  </Accordion>
+</AccordionGroup>
+
+## REST API integration (alternative)
+
+If LTI isn't available, use Canvas REST API for basic integration:
+
+<Steps>
+  <Step title="Generate Canvas API key">
+    In Canvas: Account → Settings → New Access Token
+  </Step>
+  
+  <Step title="Configure in Coraltalk">
+    Coraltalk Integrations → Canvas REST API → paste your token
+  </Step>
+  
+  <Step title="Manual grade sync">
+    Grades can be synced on-demand from Coraltalk assignments page
+  </Step>
+</Steps>
+
+<Info>
+REST API integration doesn't provide SSO. Students still need separate Coraltalk accounts.
+</Info>
+
+See [Canvas REST API guide](/integrations/canvas-rest-api) for full instructions.
+
+## Support
+
+<Card title="Need help with Canvas integration?" icon="life-ring">
+  Contact **support@coraltalk.com** with:
+  - Your Canvas domain
+  - School name
+  - Error messages or screenshots
+  - Whether you're setting up LTI or REST API
+</Card>
+
+## Related guides
+
+<CardGroup cols={2}>
+  <Card title="LTI setup details" icon="book" href="/integrations/canvas-lti">
+    Complete LTI 1.3 configuration steps
+  </Card>
+  
+  <Card title="REST API setup" icon="code" href="/integrations/canvas-rest-api">
+    Alternative Canvas integration
+  </Card>
+  
+  <Card title="For school admins" icon="building-columns" href="/getting-started/for-school-admins">
+    Organization-wide setup
+  </Card>
+  
+  <Card title="Troubleshooting" icon="wrench" href="/troubleshooting/common-issues">
+    Common issues and fixes
+  </Card>
+</CardGroup>

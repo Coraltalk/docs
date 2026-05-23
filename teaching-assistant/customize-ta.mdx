@@ -1,0 +1,311 @@
+---
+title: "Customize your teaching assistant"
+description: "Configure Coral's personality, voice, and behavior for your class"
+icon: "sliders"
+---
+
+Each Coraltalk class includes **Coral**, your AI teaching assistant. Customize Coral to match your teaching style and course needs.
+
+## Quick setup (3-5 minutes)
+
+Most teachers configure a usable TA in **3-5 minutes** after syllabus upload, then refine over the first week of term.
+
+<Steps>
+  <Step title="Navigate to Customize">
+    Open your class → Click **Customize** in the sidebar (or **24/7 TA** card from Summary)
+  </Step>
+  
+  <Step title="Set basic identity">
+    - **Name** — Keep "Coral" or choose a custom name
+    - **Voice** — Select from available AI voices (preview each one)
+    - **Language** — Primary language for responses
+  </Step>
+  
+  <Step title="Define personality">
+    Write a short description of how Coral should behave:
+    - Teaching style (Socratic, direct, encouraging)
+    - Tone (formal, casual, supportive)
+    - Approach to questions (give answers, guide to answers, challenge assumptions)
+  </Step>
+  
+  <Step title="Set guardrails">
+    Configure what Coral should and shouldn't do:
+    - Answer homework directly vs. guide students
+    - Handle off-topic questions
+    - Refer students back to you for specific topics
+  </Step>
+  
+  <Step title="Test and refine">
+    Have a conversation with Coral yourself, then adjust based on responses
+  </Step>
+</Steps>
+
+## Customization options
+
+### Identity and voice
+
+<Accordion title="TA name">
+  **Default**: Coral
+  
+  **Custom options**: Choose any name that fits your class theme or personality. Some teachers use:
+  - Subject-related names (Newton, Darwin, Socrates)
+  - Friendly names (Alex, Sam, Jordan)
+  - Course-specific assistants (CS101 Guide, Marketing Mentor)
+</Accordion>
+
+<Accordion title="Voice selection">
+  Choose from multiple AI voice options:
+  - **Male** and **female** voice options
+  - Different accents and speaking styles
+  - **Preview** each voice before selecting
+  
+  <Tip>Students respond better to voices that match your course context (professional for business, friendly for language learning)</Tip>
+</Accordion>
+
+<Accordion title="Language">
+  Set the primary language for Coral's responses. Coral can:
+  - Respond in the set language
+  - Switch languages if a student asks in another language (configurable)
+  - Provide translations when helpful
+</Accordion>
+
+### Personality and teaching style
+
+Define how Coral interacts with students using the **personality prompt**:
+
+<CodeGroup>
+```text Socratic style
+You are a Socratic teaching assistant. Never give direct answers. Instead, ask probing questions that lead students to discover the answer themselves. When a student asks a question, respond with 2-3 questions that guide their thinking.
+```
+
+```text Direct and supportive
+You are a helpful and encouraging teaching assistant. Provide clear, direct answers to student questions. Use examples from the course materials. Always encourage students who are struggling and celebrate their progress.
+```
+
+```text Challenge-focused
+You are a rigorous teaching assistant who challenges students to think deeply. Provide answers but always follow up with "Now explain back to me what this means" or "How would you apply this concept to X?". Push students beyond surface understanding.
+```
+</CodeGroup>
+
+### Behavior guardrails
+
+Set boundaries for what Coral should and shouldn't do:
+
+<AccordionGroup>
+  <Accordion title="Homework and assignments">
+    Options:
+    - **Never provide direct answers** — Guide students with hints and questions
+    - **Partial help allowed** — Explain concepts but don't solve problems
+    - **Full tutoring** — Help students work through problems step-by-step
+    
+    <Warning>Be explicit about your expectations to avoid academic integrity issues</Warning>
+  </Accordion>
+  
+  <Accordion title="Off-topic questions">
+    Configure how Coral handles non-course questions:
+    - Politely redirect to course topics
+    - Answer briefly then return to coursework
+    - Refuse to engage with off-topic discussions
+  </Accordion>
+  
+  <Accordion title="Escalation to teacher">
+    Tell Coral when to refer students back to you:
+    - Personal issues or complaints
+    - Grade disputes
+    - Extension requests
+    - Technical problems
+    - Specific complex topics you want to teach directly
+  </Accordion>
+  
+  <Accordion title="Citation and sources">
+    Control whether Coral:
+    - Cites specific pages from uploaded materials
+    - Refers to lecture notes or readings by name
+    - Admits uncertainty when information isn't in course materials
+  </Accordion>
+</AccordionGroup>
+
+## Knowledge base integration
+
+Coral's answers are grounded in your uploaded materials. See [Knowledge library](/teaching-assistant/knowledge-library) for:
+
+- Uploading syllabi and course documents
+- Managing lecture notes and slides
+- Adding supplementary resources
+- Updating materials throughout the term
+
+<Info>
+Strong course materials = better TA responses. Upload your syllabus, lecture slides, and key readings for best results.
+</Info>
+
+## Advanced settings
+
+<Accordion title="Response length">
+  Control how verbose Coral's answers are:
+  - **Concise** — Brief, direct responses
+  - **Standard** — Balanced detail
+  - **Detailed** — Comprehensive explanations with examples
+</Accordion>
+
+<Accordion title="Proactive features">
+  Enable optional behaviors:
+  - **Follow-up questions** — Coral asks clarifying questions
+  - **Related topics** — Suggests connected concepts to explore
+  - **Check understanding** — Periodically asks students to explain back
+</Accordion>
+
+<Accordion title="Accessibility">
+  - **Reading level** — Adjust language complexity
+  - **Use of analogies** — More or fewer metaphorical explanations
+  - **Visual descriptions** — How to describe diagrams or images verbally
+</Accordion>
+
+## Example configurations
+
+<Tabs>
+  <Tab title="Introductory course">
+    ```text
+    You are Coral, a patient and encouraging teaching assistant for Introduction to Biology. 
+    
+    Use simple language and lots of real-world examples. When students ask questions, first 
+    check if they understand key vocabulary before diving into explanations. Never make 
+    students feel bad for asking "basic" questions.
+    
+    For homework questions, provide hints and guide students toward the answer rather than 
+    giving it directly. Always cite specific pages from the textbook when possible.
+    
+    Refer students to Professor Smith for: grade questions, extension requests, or any 
+    personal concerns.
+    ```
+  </Tab>
+  
+  <Tab title="Advanced seminar">
+    ```text
+    You are Coral, a rigorous teaching assistant for Advanced Economic Theory. 
+    
+    Engage with students at a graduate level. Challenge their assumptions and push them 
+    to defend their reasoning with evidence from the readings. It's okay to say "that's 
+    not quite right" when students misunderstand core concepts.
+    
+    For problem sets, help students work through problems but make them do the mathematical 
+    work themselves. Ask "Why did you choose that approach?" frequently.
+    
+    Refer students to Professor Chen for: thesis guidance, recommendations, or methodology 
+    questions requiring deep expertise.
+    ```
+  </Tab>
+  
+  <Tab title="Language learning">
+    ```text
+    You are Coral, a conversational teaching assistant for Spanish 201. 
+    
+    Always respond in Spanish, even if students write in English (gently correct them). 
+    Be encouraging about mistakes—they're part of learning! Use the vocabulary and grammar 
+    structures from our current unit.
+    
+    When students struggle, provide the Spanish word/phrase they're looking for, then ask 
+    them to use it in a new sentence. Celebrate progress.
+    
+    For grammar rules, refer to specific sections in our textbook. For cultural questions 
+    beyond the course materials, acknowledge you're unsure and suggest resources.
+    
+    Refer students to Profesora García for: oral exam scheduling, grade concerns, or study 
+    abroad questions.
+    ```
+  </Tab>
+</Tabs>
+
+## Test your configuration
+
+<Steps>
+  <Step title="Chat as a student">
+    Click **Test as student** or start a conversation with Coral
+  </Step>
+  
+  <Step title="Ask various question types">
+    Test:
+    - Direct concept questions
+    - Homework-related questions
+    - Off-topic questions
+    - Challenging or unclear questions
+  </Step>
+  
+  <Step title="Evaluate responses">
+    Check if Coral:
+    - Matches your intended tone and style
+    - Stays within your guardrails
+    - Cites course materials appropriately
+    - Handles edge cases as you expect
+  </Step>
+  
+  <Step title="Refine and iterate">
+    Adjust personality prompt and settings based on test results
+  </Step>
+</Steps>
+
+## Monitor and improve
+
+After students start using Coral:
+
+<Card title="Review student chats" icon="messages" href="/teaching-assistant/review-student-chats">
+  Regularly check conversations to see how Coral is performing and where students are confused
+</Card>
+
+Look for:
+- Questions Coral couldn't answer well
+- Topics students repeatedly ask about (may need more materials or lecture time)
+- Instances where Coral violated your guardrails
+- Student feedback on helpfulness
+
+Use these insights to:
+1. Update your personality prompt
+2. Add missing materials to knowledge base
+3. Adjust guardrails
+4. Address gaps in next lecture
+
+## Tips for effective TA customization
+
+<AccordionGroup>
+  <Accordion title="Be specific, not generic">
+    ❌ "Be helpful and nice"
+    ✅ "When students are stuck, ask 3 guiding questions before giving hints. Always validate their effort first."
+  </Accordion>
+  
+  <Accordion title="Include examples">
+    ❌ "Use relevant examples"
+    ✅ "Use examples from sports, cooking, and everyday life since this is a non-majors course"
+  </Accordion>
+  
+  <Accordion title="Define edge cases">
+    ❌ "Help with homework"
+    ✅ "For homework: explain concepts, but never solve the actual problem. If asked for an answer, say 'Let's work through this together. What's your first step?'"
+  </Accordion>
+  
+  <Accordion title="Iterate based on reality">
+    Start with your best guess, then refine weekly based on actual student conversations. Perfect is the enemy of good.
+  </Accordion>
+  
+  <Accordion title="Match your in-class style">
+    If you're formal in lectures, make Coral formal. If you're casual and joke around, let Coral do the same.
+  </Accordion>
+</AccordionGroup>
+
+## Related features
+
+<CardGroup cols={2}>
+  <Card title="Knowledge library" icon="books" href="/teaching-assistant/knowledge-library">
+    Upload course materials for Coral
+  </Card>
+  
+  <Card title="Review chats" icon="messages" href="/teaching-assistant/review-student-chats">
+    Monitor student conversations
+  </Card>
+  
+  <Card title="TA overview" icon="headset" href="/teaching-assistant/overview">
+    How the 24/7 TA works
+  </Card>
+  
+  <Card title="Oral assignments" icon="microphone" href="/assessments/oral-assignments">
+    Create graded assessments
+  </Card>
+</CardGroup>

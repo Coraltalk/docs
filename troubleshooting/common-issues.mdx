@@ -1,0 +1,363 @@
+---
+title: "Common issues"
+description: "Troubleshooting guide for frequent Coraltalk problems"
+icon: "wrench"
+---
+
+This guide covers the most common issues users encounter and how to resolve them.
+
+## Microphone and audio issues
+
+<AccordionGroup>
+  <Accordion title="Microphone not working">
+    **Symptoms**: Can't record audio, microphone icon shows red X, "No microphone detected" error
+    
+    **Solutions**:
+    
+    <Steps>
+      <Step title="Check browser permissions">
+        1. Look for microphone icon in browser address bar
+        2. Click it and select **Allow**
+        3. Refresh the page
+      </Step>
+      
+      <Step title="Check system permissions">
+        **Mac**: System Settings → Privacy & Security → Microphone → Enable for your browser
+        
+        **Windows**: Settings → Privacy → Microphone → Allow apps to access microphone
+      </Step>
+      
+      <Step title="Close other apps">
+        Close apps that might be using your microphone (Zoom, Teams, Discord)
+      </Step>
+      
+      <Step title="Try different browser">
+        Chrome and Safari work best. Try switching if issues persist.
+      </Step>
+    </Steps>
+    
+    <Tip>
+    See [Browser and microphone troubleshooting](/troubleshooting/browser-and-microphone) for detailed steps
+    </Tip>
+  </Accordion>
+  
+  <Accordion title="Can't hear Coral speaking">
+    **Symptoms**: No audio output, Coral's responses are text-only
+    
+    **Solutions**:
+    1. Check your device volume (not muted)
+    2. Check browser isn't muted (look for mute icon in tab)
+    3. Try headphones to rule out speaker issues
+    4. Check Coral's voice settings in Customize → ensure voice is selected
+    5. Refresh the page
+  </Accordion>
+  
+  <Accordion title="Poor audio quality or echoing">
+    **Symptoms**: Coral can't understand you, transcription errors, echo during conversation
+    
+    **Solutions**:
+    1. Use headphones with built-in microphone
+    2. Find a quiet space (background noise affects quality)
+    3. Speak clearly and at normal pace
+    4. Don't use speakerphone mode
+    5. Check internet connection (poor connection = audio issues)
+  </Accordion>
+</AccordionGroup>
+
+## Login and account issues
+
+<AccordionGroup>
+  <Accordion title="Can't log in">
+    **Solutions**:
+    
+    <Tabs>
+      <Tab title="Email verification">
+        - Check your inbox for verification code
+        - Check spam/junk folder
+        - Verification code expires after 10 minutes — request new one
+        - Make sure you're using the correct email address
+      </Tab>
+      
+      <Tab title="Google sign-in">
+        - Clear browser cache and cookies
+        - Make sure you're logged into correct Google account
+        - Try incognito/private mode
+        - Check if popup blocker is preventing sign-in window
+      </Tab>
+      
+      <Tab title="Password reset">
+        If you set a password and forgot it:
+        1. Click "Forgot password" on login page
+        2. Enter your email
+        3. Check for reset link (expires after 1 hour)
+      </Tab>
+    </Tabs>
+  </Accordion>
+  
+  <Accordion title="'Access denied' or 'Not authorized'">
+    **Possible causes**:
+    1. **Not enrolled in class** — Ask teacher for class link or code
+    2. **Wrong account** — Logged in with different email than invited
+    3. **Expired invitation** — Ask teacher to resend invite
+    4. **Organization restrictions** — Contact your school admin
+    
+    **Solution**: Log out completely, clear cache, log back in with correct account
+  </Accordion>
+  
+  <Accordion title="Can't switch between organizations">
+    **Solution**:
+    1. Click your profile picture (top right)
+    2. Select **Switch organization** from dropdown
+    3. Choose the organization you want
+    
+    If organization doesn't appear, you may not be a member — check with admin.
+  </Accordion>
+</AccordionGroup>
+
+## Class and enrollment issues
+
+<AccordionGroup>
+  <Accordion title="Class link not working">
+    **Symptoms**: "Invalid class code", "Class not found", 404 error
+    
+    **Solutions**:
+    1. Make sure you're logged in
+    2. Copy-paste the full URL (don't type manually)
+    3. Check for extra spaces at beginning or end
+    4. Ask teacher for new link
+    5. Use class code instead (enter on home page)
+  </Accordion>
+  
+  <Accordion title="Can't see assignments">
+    **Possible reasons**:
+    1. **Not enrolled** — Join the class first
+    2. **Not published** — Teacher hasn't published assignments yet
+    3. **Date restrictions** — Assignment not available until specific date
+    4. **Wrong class** — Check you're in correct class
+    
+    **Solution**: Refresh page, check with teacher about assignment availability
+  </Accordion>
+  
+  <Accordion title="Already submitted but assignment shows 'Not submitted'">
+    **Symptoms**: Completed assignment but teacher sees no submission
+    
+    **Solutions**:
+    1. Check if you actually clicked **Submit** button
+    2. Look for email confirmation of submission
+    3. Check if you're in correct class (multiple sections)
+    4. Wait 5-10 minutes and refresh (processing delay)
+    5. Contact teacher with screenshot of your submission
+  </Accordion>
+</AccordionGroup>
+
+## Oral assignment issues
+
+<AccordionGroup>
+  <Accordion title="Evaluation stuck at 'Processing' or 'Evaluating'">
+    **Normal behavior**: Evaluation takes 2-10 minutes depending on conversation length
+    
+    **If stuck longer than 15 minutes**:
+    1. Refresh the page
+    2. Check back in 30 minutes (high-traffic periods take longer)
+    3. If still stuck after 1 hour, contact support with:
+       - Assignment name
+       - Date/time of submission
+       - Your class name
+  </Accordion>
+  
+  <Accordion title="Conversation keeps disconnecting">
+    **Causes**: Usually internet connection or browser issues
+    
+    **Solutions**:
+    1. Check internet connection (run speed test: speedtest.net)
+    2. Switch to stronger WiFi or ethernet
+    3. Close other bandwidth-heavy apps
+    4. Try different browser (Chrome recommended)
+    5. Disable browser extensions that might interfere
+    6. Clear browser cache
+  </Accordion>
+  
+  <Accordion title="Coral not responding or asking irrelevant questions">
+    **For students**: This is a content issue — let your teacher know
+    
+    **For teachers**:
+    1. Review assignment questions for clarity
+    2. Check if course materials are uploaded correctly
+    3. Review Coral's personality settings (Customize tab)
+    4. Test the assignment yourself to verify behavior
+  </Accordion>
+  
+  <Accordion title="Can't submit oral assignment">
+    **Symptoms**: Submit button grayed out or not working
+    
+    **Solutions**:
+    1. Make sure you completed all required questions
+    2. Wait for current question to finish processing
+    3. Check if conversation actually ended (look for "Conversation complete" message)
+    4. Try refreshing page (your progress should be saved)
+    5. Clear cache and try again
+  </Accordion>
+</AccordionGroup>
+
+## Canvas integration issues
+
+<AccordionGroup>
+  <Accordion title="Can't launch Coraltalk from Canvas">
+    **Solutions**:
+    
+    <Steps>
+      <Step title="Check navigation">
+        Settings → Navigation → Make sure Coraltalk is in visible tools
+      </Step>
+      
+      <Step title="Check enrollment">
+        Confirm you're enrolled in the Canvas course
+      </Step>
+      
+      <Step title="Clear cache">
+        Clear Canvas cache and cookies, then log back in
+      </Step>
+      
+      <Step title="Try direct login">
+        Log into coraltalk.com directly to see if it's an LTI issue
+      </Step>
+    </Steps>
+    
+    **For teachers**: Contact IT or support@coraltalk.com to verify LTI configuration
+  </Accordion>
+  
+  <Accordion title="Grades not syncing to Canvas">
+    **Check**:
+    1. Assignment was created with Canvas link enabled (in Coraltalk)
+    2. Canvas gradebook column exists
+    3. Grade not hidden in Coraltalk settings
+    4. Wait 5-10 minutes for sync delay
+    
+    **For teachers**: Try manually syncing from Coraltalk assignment settings
+    
+    See [Canvas integration guide](/integrations/canvas-integration) for details
+  </Accordion>
+  
+  <Accordion title="Students see different classes in Canvas vs. Coraltalk">
+    **Cause**: Roster sync issue or multiple organizations
+    
+    **Solution**:
+    1. Launch Coraltalk from Canvas (not direct coraltalk.com)
+    2. Check if student is in correct organization
+    3. Teacher should verify LTI setup and roster sync settings
+  </Accordion>
+</AccordionGroup>
+
+## Browser and performance issues
+
+<AccordionGroup>
+  <Accordion title="Page loading slowly or freezing">
+    **Solutions**:
+    1. Close unnecessary browser tabs
+    2. Clear browser cache and cookies
+    3. Disable browser extensions temporarily
+    4. Check internet speed (need minimum 5 Mbps)
+    5. Update browser to latest version
+    6. Try incognito/private mode
+  </Accordion>
+  
+  <Accordion title="Video playback not working">
+    **Symptoms**: Can't watch recorded oral assignment submissions
+    
+    **Solutions**:
+    1. Update browser to latest version
+    2. Enable JavaScript in browser settings
+    3. Clear cache
+    4. Try different browser
+    5. Check if video is still processing (wait 5-10 minutes after submission)
+  </Accordion>
+  
+  <Accordion title="Mobile app issues">
+    Coraltalk is web-based and works best on:
+    - **Desktop/laptop** browsers (recommended)
+    - **iPad** or larger tablets
+    - **Mobile** browsers (limited features)
+    
+    For best experience, use desktop Chrome, Safari, or Edge.
+  </Accordion>
+</AccordionGroup>
+
+## Teacher-specific issues
+
+<AccordionGroup>
+  <Accordion title="Can't create assignments">
+    **Possible causes**:
+    1. **Usage limit reached** — Check sidebar for usage alerts
+    2. **Subscription expired** — Go to Billing in org settings
+    3. **Legacy class** — Old classes may need migration
+    4. **Permissions** — Contact org admin if you're not class owner
+  </Accordion>
+  
+  <Accordion title="Students not appearing in class list">
+    **Solutions**:
+    1. Have students re-join with class link
+    2. Check if students are in different section/class
+    3. For Canvas: verify roster sync is enabled
+    4. Wait 10 minutes for enrollment to process
+    5. Check organization settings for enrollment restrictions
+  </Accordion>
+  
+  <Accordion title="Can't upload course materials">
+    **File requirements**:
+    - Accepted formats: PDF, DOCX, TXT, PPTX
+    - Maximum file size: 50MB per file
+    - Files must not be password-protected
+    
+    **If upload fails**:
+    1. Try smaller file (compress large PDFs)
+    2. Convert to PDF if using other format
+    3. Check file isn't corrupted (open it locally first)
+    4. Try different browser
+  </Accordion>
+</AccordionGroup>
+
+## Still need help?
+
+If your issue isn't covered here:
+
+<Steps>
+  <Step title="Check detailed guides">
+    Browse topic-specific documentation:
+    - [Browser and microphone](/troubleshooting/browser-and-microphone)
+    - [Canvas integration](/integrations/canvas-integration)
+    - [Oral assignments](/assessments/oral-assignments)
+  </Step>
+  
+  <Step title="Contact support">
+    Email **support@coraltalk.com** with:
+    - Detailed description of the issue
+    - Screenshots or screen recording
+    - Browser and OS version
+    - Steps to reproduce the problem
+    - Your class or organization name
+  </Step>
+  
+  <Step title="Check service status">
+    If multiple users report issues, check our status page or @coraltalk_ai on social media for service updates
+  </Step>
+</Steps>
+
+<Card title="Need urgent help?" icon="phone">
+  For critical issues during exams or high-stakes assessments, mark your email as **URGENT** and include exam date/time. We prioritize these requests.
+</Card>
+
+## Report a bug
+
+Found a bug? Help us fix it:
+
+1. Email **support@coraltalk.com** with subject: "Bug Report: [brief description]"
+2. Include:
+   - What you expected to happen
+   - What actually happened
+   - Steps to reproduce
+   - Screenshots
+   - Browser and OS
+
+<Info>
+We typically respond to bug reports within 24 hours (faster for critical issues).
+</Info>
