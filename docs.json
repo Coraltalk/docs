@@ -3,9 +3,9 @@
   "theme": "mint",
   "name": "Coraltalk AI",
   "colors": {
-    "primary": "#4400FF",
-    "light": "#6B21FF",
-    "dark": "#3300CC"
+    "primary": "#0E7490",
+    "light": "#22D3EE",
+    "dark": "#0E7490"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -48,10 +48,26 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Changelog",
+        "groups": [
+          {
+            "group": "Release Notes",
+            "pages": [
+              "changelog/releases"
+            ]
+          }
+        ]
       }
     ],
     "global": {
       "anchors": [
+        {
+          "anchor": "What's New",
+          "href": "/changelog/releases",
+          "icon": "sparkles"
+        },
         {
           "anchor": "Book a demo",
           "href": "https://coraltalk.com/demo-req",
@@ -87,5 +103,13 @@
       "linkedin": "https://www.linkedin.com/company/coraltalk-ai",
       "instagram": "https://www.instagram.com/coraltalk_ai"
     }
+  },
+  "footerSocials": {
+    "linkedin": "https://www.linkedin.com/company/coraltalk-ai",
+    "instagram": "https://www.instagram.com/coraltalk_ai"
+  },
+  "modeToggle": {
+    "default": "dark",
+    "isHidden": false
   }
 }
