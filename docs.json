@@ -25,27 +25,19 @@
           },
           {
             "group": "Teaching Assistant",
-            "pages": [
-              "teaching-assistant/customize-ta"
-            ]
+            "pages": ["teaching-assistant/customize-ta"]
           },
           {
             "group": "Assessments",
-            "pages": [
-              "assessments/oral-assignments"
-            ]
+            "pages": ["assessments/oral-assignments"]
           },
           {
             "group": "Integrations",
-            "pages": [
-              "integrations/canvas-integration"
-            ]
+            "pages": ["integrations/canvas-integration"]
           },
           {
             "group": "Help & Troubleshooting",
-            "pages": [
-              "troubleshooting/common-issues"
-            ]
+            "pages": ["troubleshooting/common-issues"]
           }
         ]
       },
@@ -54,9 +46,36 @@
         "groups": [
           {
             "group": "Release Notes",
+            "pages": ["changelog/releases"]
+          }
+        ]
+      },
+      {
+        "tab": "Platform APIs",
+        "groups": [
+          {
+            "group": "Getting started",
             "pages": [
-              "changelog/releases"
+              "coraltalk-apis/overview",
+              "coraltalk-apis/quickstart",
+              "coraltalk-apis/authentication",
+              "coraltalk-apis/rate-limits",
+              "coraltalk-apis/errors"
             ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "coraltalk-apis/courses",
+              "coraltalk-apis/classes",
+              "coraltalk-apis/oral-assessments",
+              "coraltalk-apis/roleplay",
+              "coraltalk-apis/vid-tickets"
+            ]
+          },
+          {
+            "group": "Custom domains",
+            "pages": ["coraltalk-apis/custom-domains"]
           }
         ]
       }

@@ -1,0 +1,39 @@
+---
+title: "Errors"
+description: "HTTP status codes, error format, and handling guidance for the Platform API."
+icon: "triangle-exclamation"
+---
+
+# Errors
+
+The Platform API uses standard HTTP status codes and a consistent JSON error body.
+
+## Error format
+
+```json
+{
+  "error": {
+    "code": "validation_error",
+    "message": "name is required",
+    "field": "name"
+  },
+  "meta": {
+    "requestId": "req_abc123"
+  }
+}
+```
+
+## HTTP status codes
+
+| Status | Meaning |
+| ------ | ------- |
+| `400` | Bad request — missing field or invalid payload |
+| `401` | Unauthorized — invalid, revoked, or env-mismatched API key |
+| `403` | Forbidden — resource belongs to another org |
+| `404` | Not found |
+| `429` | Rate limit exceeded |
+| `500` | Server error — retry with backoff |
+
+## Support
+
+When reporting issues, include `meta.requestId`, HTTP method, path, and timestamp. Email [support@coraltalk.com](mailto:support@coraltalk.com).

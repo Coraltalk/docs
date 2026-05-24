@@ -1,0 +1,50 @@
+---
+title: "VidTickets"
+description: "Create and manage VidTicket video assignments via the Platform API."
+icon: "video"
+---
+
+# VidTickets
+
+A **VidTicket** is an async video assignment: you upload a prompt video and students reply with their own.
+
+## Endpoints
+
+| Method | Path | Description |
+| ------ | ---- | ----------- |
+| `POST` | `/uploads/presign` | Presigned URL for prompt video |
+| `POST` | `/vid-tickets` | Create |
+| `GET` | `/vid-tickets` | List |
+| `GET` | `/vid-tickets/:id` | Get |
+| `PUT` | `/vid-tickets/:id` | Update |
+| `DELETE` | `/vid-tickets/:id` | Delete |
+
+## Upload then create
+
+```bash
+# 1. Get presigned URL
+curl -X POST "https://app.coraltalk.com/api/v1/prod/uploads/presign" \
+  -H "Authorization: Bearer ct_live_YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"filename": "prompt.mp4", "contentType": "video/mp4", "purpose": "vid-ticket-question"}'
+
+# 2. Upload video to returned uploadUrl, then create ticket
+curl -X POST "https://app.coraltalk.com/api/v1/prod/vid-tickets" \
+  -H "Authorization: Bearer ct_live_YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Week 3 reflection",
+    "classId": "CLASS_ID",
+    "questionVideoUrl": "PUBLIC_URL_FROM_PRESIGN"
+  }'
+```
+
+## Student URL
+
+```
+https://app.coraltalk.com/vid-ticket?id={VID_TICKET_ID}
+```
+
+<Warning>
+  Custom domains in v1 serve oral assessment and roleplay exam pages only. VidTickets are accessed on `app.coraltalk.com`.
+</Warning>

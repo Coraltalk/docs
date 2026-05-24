@@ -1,0 +1,32 @@
+---
+title: "Rate limits"
+description: "Platform API rate limiting, headers, and best practices."
+icon: "gauge-high"
+---
+
+# Rate limits
+
+Platform API requests are rate limited **per API key** using a sliding window.
+
+## Default limits
+
+| Environment | Limit |
+| ----------- | ----- |
+| Dev (`ct_test_`) | 60 requests per minute |
+| Prod (`ct_live_`) | 600 requests per minute |
+
+## Rate limit headers
+
+| Header | Description |
+| ------ | ----------- |
+| `X-RateLimit-Limit` | Maximum requests allowed in the window |
+| `X-RateLimit-Remaining` | Requests remaining in the current window |
+| `X-RateLimit-Reset` | Unix timestamp when the window resets |
+
+When exceeded, the API returns `429 Too Many Requests` with a `Retry-After` header.
+
+## Best practices
+
+- On `429`, wait for `Retry-After` before retrying.
+- Use dev keys while iterating to protect production quotas.
+- Cache list responses where possible instead of polling on every action.

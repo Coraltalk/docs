@@ -1,0 +1,51 @@
+---
+title: "Roleplay"
+description: "Create and manage roleplay speaking scenarios via the Platform API."
+icon: "masks-theater"
+---
+
+# Roleplay
+
+A **roleplay** is a scenario-based speaking assignment where students practice a conversation in a defined role.
+
+## Endpoints
+
+| Method | Path | Description |
+| ------ | ---- | ----------- |
+| `POST` | `/roleplay` | Create |
+| `GET` | `/roleplay` | List (`?classId=` optional) |
+| `GET` | `/roleplay/:id` | Get |
+| `PUT` | `/roleplay/:id` | Update |
+| `DELETE` | `/roleplay/:id` | Delete |
+
+## Create
+
+| Field | Required | Description |
+| ----- | -------- | ----------- |
+| `name` | Yes | Scenario title |
+| `classId` | Yes | Class ID |
+| `roleplayStudentRole` | Yes | Student's role |
+| `roleplayCoralRole` | Yes | Coral's role |
+| `roleplayScenario` | Yes | Scenario description |
+| `roleplayDuration` | No | Max duration (seconds, default `600`) |
+
+```bash
+curl -X POST "https://app.coraltalk.com/api/v1/prod/roleplay" \
+  -H "Authorization: Bearer ct_live_YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Salary negotiation",
+    "classId": "CLASS_ID",
+    "roleplayStudentRole": "Job candidate",
+    "roleplayCoralRole": "Hiring manager",
+    "roleplayScenario": "Negotiate a starting salary"
+  }'
+```
+
+## Student URL
+
+```
+https://app.coraltalk.com/exam/{EXAM_ID}/roleplay
+```
+
+Or on a [custom domain](/coraltalk-apis/custom-domains): `https://exams.yourschool.edu/exam/{EXAM_ID}/roleplay`

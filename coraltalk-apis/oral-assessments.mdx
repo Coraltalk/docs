@@ -1,0 +1,51 @@
+---
+title: "Oral assessments"
+description: "Create and manage oral assessment exams via the Platform API."
+icon: "microphone"
+---
+
+# Oral assessments
+
+An **oral assessment** is a voice-based exam where students converse with Coral and receive AI-powered evaluation.
+
+## Endpoints
+
+| Method | Path | Description |
+| ------ | ---- | ----------- |
+| `POST` | `/oral-assessments` | Create |
+| `GET` | `/oral-assessments` | List (`?classId=` optional) |
+| `GET` | `/oral-assessments/:id` | Get |
+| `PUT` | `/oral-assessments/:id` | Update |
+| `DELETE` | `/oral-assessments/:id` | Delete |
+
+## Create
+
+| Field | Required | Default | Description |
+| ----- | -------- | ------- | ----------- |
+| `name` | Yes | — | Assessment title |
+| `classId` | Yes | — | Class ID |
+| `duration` | No | `600` | Max duration (seconds) |
+| `examType` | No | `"Generic"` | `"Generic"`, `"Personalized"`, or `"Hybrid"` |
+| `questions` | No | — | Array of `{ id, text }` |
+
+```bash
+curl -X POST "https://app.coraltalk.com/api/v1/prod/oral-assessments" \
+  -H "Authorization: Bearer ct_live_YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Midterm Oral Exam",
+    "classId": "CLASS_ID",
+    "duration": 900,
+    "questions": [
+      { "id": "1", "text": "Explain cellular respiration." }
+    ]
+  }'
+```
+
+## Student URL
+
+```
+https://app.coraltalk.com/exam/{EXAM_ID}
+```
+
+Or on a [custom domain](/coraltalk-apis/custom-domains): `https://exams.yourschool.edu/exam/{EXAM_ID}`

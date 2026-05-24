@@ -1,0 +1,52 @@
+---
+title: "Custom domains"
+description: "Host branded oral assessment and roleplay exam pages on your own domain."
+icon: "globe"
+---
+
+# Custom domains
+
+Organizations can configure a **custom domain** so students take oral assessments and roleplay on your hostname with your logo, company name, and post-exam redirect URL.
+
+<Warning>
+  Custom domains serve **exam-taking pages only** — not the full Coraltalk platform. Admin, billing, API keys, VidTickets, and other routes return **404** on your custom domain.
+</Warning>
+
+## Allowed routes on custom domains
+
+| Path | Purpose |
+| ---- | ------- |
+| `/exam/{id}` | Exam entry |
+| `/exam/{id}/oral-learning` | Oral assessment start |
+| `/exam/{id}/roleplay` | Roleplay session |
+| `/exam/{id}/live` | Live oral exam |
+| `/exam/{id}/thank-you` | Completion page |
+
+## Setup (organization admin UI)
+
+1. Sign in at [app.coraltalk.com](https://app.coraltalk.com) as an org admin.
+2. Open **Custom domains** in organization settings.
+3. Enter your hostname (e.g. `exams.yourschool.edu`).
+4. Add the CNAME record shown at your DNS provider.
+5. Click **Verify** and wait for DNS propagation.
+6. Configure white-label: company name, logo, post-exam redirect URL.
+7. Choose **Applies to**: oral assessments, roleplay, or both.
+
+## DNS example
+
+```
+Type:  CNAME
+Name:  exams
+Value: (target provided by Coraltalk / Vercel)
+```
+
+TLS is provisioned automatically after verification.
+
+## Example student links
+
+```
+https://exams.yourschool.edu/exam/{EXAM_ID}
+https://exams.yourschool.edu/exam/{EXAM_ID}/roleplay
+```
+
+Platform API calls remain on `app.coraltalk.com/api/v1/...`.

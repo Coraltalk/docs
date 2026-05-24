@@ -1,0 +1,78 @@
+---
+title: "Authentication"
+description: "Create and manage organization API keys for dev and production environments."
+icon: "key"
+---
+
+# Authentication
+
+Authenticate every Platform API request with a **Bearer token** API key created by an organization admin.
+
+## API keys
+
+Keys are created in the Coraltalk app:
+
+1. Sign in at [app.coraltalk.com](https://app.coraltalk.com) as an **organization admin**.
+2. Open **API Keys** from the organization sidebar.
+3. Choose **Create key** and select the environment:
+   - **Test** — prefix `ct_test_`, use with `/api/v1/dev/...`
+   - **Live** — prefix `ct_live_`, use with `/api/v1/prod/...`
+4. Copy the full key immediately. It is shown **once** and cannot be retrieved later.
+
+### Key format
+
+| Part | Example | Notes |
+| ---- | ------- | ----- |
+| Prefix | `ct_live_` or `ct_test_` | Identifies environment |
+| Secret | random string | Stored hashed server-side |
+
+Example header:
+
+```
+Authorization: Bearer ct_live_YOUR_KEY
+```
+
+<Tip>
+  Store keys in a secrets manager (AWS Secrets Manager, Vault, etc.). Never commit keys to source control or expose them in client-side code.
+</Tip>
+
+## Environment matching
+
+| Key prefix | Required base path |
+| ---------- | ------------------ |
+| `ct_test_` | `/api/v1/dev/`     |
+| `ct_live_` | `/api/v1/prod/`    |
+
+Mismatching key and path returns `401 Unauthorized`.
+
+## Dev vs production data
+
+Resources created via the API are tagged with an environment:
+
+- **Dev** (`/api/v1/dev/`) — test data isolated from your live org UI and billing usage.
+- **Prod** (`/api/v1/prod/`) — live data visible in the Coraltalk app and counted toward usage.
+
+Use dev keys while building and testing your integration. Switch to live keys only when you are ready for production traffic.
+
+## Organization scope
+
+Each API key is bound to a single **organization**. All created resources belong to that org. Keys cannot access another organization's data.
+
+Independent teachers (accounts without an active organization) cannot create API keys.
+
+## Revoking keys
+
+From **API Keys** in the organization sidebar, revoke a key to immediately block further requests. Revoked keys return `401 Unauthorized`.
+
+Rotate keys by creating a new key, updating your integration, then revoking the old key.
+
+## Request logs
+
+Organization admins can view **API Logs** in the sidebar. Logs include:
+
+- Timestamp, HTTP method, path
+- Status code and latency
+- API key ID (not the secret)
+- Environment (`dev` or `prod`)
+
+Request and response bodies are **not** logged in v1.

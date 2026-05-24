@@ -1,0 +1,46 @@
+---
+title: "Classes"
+description: "Create and manage classes nested under a course."
+icon: "users-rectangle"
+---
+
+# Classes
+
+A **class** is a teaching workspace inside a course. Assessments are assigned to a class.
+
+## Endpoints
+
+| Method | Path | Description |
+| ------ | ---- | ----------- |
+| `POST` | `/courses/:courseId/classes` | Create a class |
+| `GET` | `/courses/:courseId/classes` | List classes |
+| `GET` | `/courses/:courseId/classes/:classId` | Get a class |
+| `PUT` | `/courses/:courseId/classes/:classId` | Update a class |
+| `DELETE` | `/courses/:courseId/classes/:classId` | Delete a class |
+
+## Create a class
+
+| Field | Required | Default | Description |
+| ----- | -------- | ------- | ----------- |
+| `name` | Yes | — | Class display name |
+| `startDate` | No | — | ISO 8601 start date |
+| `endDate` | No | — | ISO 8601 end date |
+| `classMode` | No | `"in-person"` | `"in-person"`, `"online"`, or `"hybrid"` |
+
+```bash
+curl -X POST "https://app.coraltalk.com/api/v1/prod/courses/COURSE_ID/classes" \
+  -H "Authorization: Bearer ct_live_YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "CS 201 — Fall 2026",
+    "classMode": "hybrid"
+  }'
+```
+
+Use the returned `_id` as `classId` when creating assessments.
+
+## Next steps
+
+- [Oral assessments](/coraltalk-apis/oral-assessments)
+- [Roleplay](/coraltalk-apis/roleplay)
+- [VidTickets](/coraltalk-apis/vid-tickets)

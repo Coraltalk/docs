@@ -1,0 +1,100 @@
+---
+title: "Quickstart"
+description: "End-to-end guide — create a course, class, and oral assessment via the Platform API."
+icon: "rocket"
+---
+
+# Quickstart
+
+This guide walks through a typical integration: create a course, add a class, create an oral assessment, and share the student exam URL.
+
+<Note>
+  Replace `YOUR_LIVE_KEY` with a `ct_live_` key for production, or use `YOUR_TEST_KEY` (`ct_test_`) with `/api/v1/dev/` while developing.
+</Note>
+
+## Prerequisites
+
+- Organization admin account on Coraltalk
+- API key created from **API Keys** in the organization sidebar
+- `curl` or any HTTP client
+
+## Step 1 — Create a course
+
+```bash
+curl -X POST "https://app.coraltalk.com/api/v1/prod/courses" \
+  -H "Authorization: Bearer ct_live_YOUR_LIVE_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Introduction to Biology",
+    "level": "undergraduate"
+  }'
+```
+
+Save the course `_id` as `COURSE_ID`.
+
+## Step 2 — Create a class
+
+```bash
+curl -X POST "https://app.coraltalk.com/api/v1/prod/courses/COURSE_ID/classes" \
+  -H "Authorization: Bearer ct_live_YOUR_LIVE_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Bio 101 — Spring 2026",
+    "classMode": "online",
+    "startDate": "2026-01-15T00:00:00.000Z",
+    "endDate": "2026-05-15T23:59:59.000Z"
+  }'
+```
+
+Save the class `_id` as `CLASS_ID`.
+
+## Step 3 — Create an oral assessment
+
+```bash
+curl -X POST "https://app.coraltalk.com/api/v1/prod/oral-assessments" \
+  -H "Authorization: Bearer ct_live_YOUR_LIVE_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Midterm Oral Exam",
+    "classId": "CLASS_ID",
+    "duration": 600,
+    "examType": "Generic",
+    "questions": [
+      { "id": "1", "text": "Explain the process of cellular respiration." },
+      { "id": "2", "text": "Compare mitosis and meiosis." }
+    ]
+  }'
+```
+
+Save the assessment `_id` as `EXAM_ID`.
+
+## Step 4 — Share the exam link
+
+Students take the exam at:
+
+```
+https://app.coraltalk.com/exam/{EXAM_ID}
+```
+
+If you configure a [custom domain](/coraltalk-apis/custom-domains), use:
+
+```
+https://exams.yourschool.edu/exam/{EXAM_ID}
+```
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Roleplay" icon="masks-theater" href="/coraltalk-apis/roleplay">
+    Create scenario-based speaking assignments
+  </Card>
+  <Card title="VidTickets" icon="video" href="/coraltalk-apis/vid-tickets">
+    Async video prompts with presigned uploads
+  </Card>
+  <Card title="Custom domains" icon="globe" href="/coraltalk-apis/custom-domains">
+    Brand exam pages on your hostname
+  </Card>
+  <Card title="Errors" icon="triangle-exclamation" href="/coraltalk-apis/errors">
+    Status codes and error handling
+  </Card>
+</CardGroup>

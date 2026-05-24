@@ -1,3 +1,14 @@
 {
+  "name": "Coral Talk",
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#000000"
+  },
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": ["index"]
+    }
+  ],
   "hideFooterBranding": true
 }

@@ -1,0 +1,57 @@
+---
+title: "Courses"
+description: "Create, list, update, and delete courses via the Platform API."
+icon: "book"
+---
+
+# Courses
+
+A **course** is a top-level container in your organization. Classes are created inside a course.
+
+## Endpoints
+
+| Method | Path | Description |
+| ------ | ---- | ----------- |
+| `POST` | `/courses` | Create a course |
+| `GET` | `/courses` | List courses |
+| `GET` | `/courses/:courseId` | Get a course |
+| `PUT` | `/courses/:courseId` | Update a course |
+| `DELETE` | `/courses/:courseId` | Delete a course |
+
+Base path: `https://app.coraltalk.com/api/v1/{env}/courses`
+
+## Create a course
+
+| Field | Required | Default | Description |
+| ----- | -------- | ------- | ----------- |
+| `name` | Yes | — | Course display name |
+| `level` | No | `"undergraduate"` | Academic level |
+
+```bash
+curl -X POST "https://app.coraltalk.com/api/v1/prod/courses" \
+  -H "Authorization: Bearer ct_live_YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Data Structures", "level": "undergraduate"}'
+```
+
+## List, get, update, delete
+
+```bash
+curl "https://app.coraltalk.com/api/v1/prod/courses" \
+  -H "Authorization: Bearer ct_live_YOUR_KEY"
+
+curl "https://app.coraltalk.com/api/v1/prod/courses/COURSE_ID" \
+  -H "Authorization: Bearer ct_live_YOUR_KEY"
+
+curl -X PUT "https://app.coraltalk.com/api/v1/prod/courses/COURSE_ID" \
+  -H "Authorization: Bearer ct_live_YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Advanced Data Structures"}'
+
+curl -X DELETE "https://app.coraltalk.com/api/v1/prod/courses/COURSE_ID" \
+  -H "Authorization: Bearer ct_live_YOUR_KEY"
+```
+
+## Next step
+
+Create [classes](/coraltalk-apis/classes) inside your course.

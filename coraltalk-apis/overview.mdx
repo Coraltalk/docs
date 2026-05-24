@@ -1,0 +1,108 @@
+---
+title: "Overview"
+description: "Integrate Coraltalk into your platform with the Public API — courses, classes, oral assessments, roleplay, and VidTickets for organizations."
+icon: "plug"
+---
+
+# Coraltalk Platform API
+
+The Coraltalk Platform API lets **organization admins** programmatically manage courses, classes, and assessments. Build your own wrapper or LMS integration on top of Coraltalk without using the web UI for every operation.
+
+<Note>
+  The Platform API is available for **organizations only**. Independent teachers cannot create API keys. Teaching assistant (conversation widget) APIs are not included in v1.
+</Note>
+
+## Base URL
+
+All API requests use:
+
+```
+https://app.coraltalk.com/api/v1/{env}/
+```
+
+Replace `{env}` with:
+
+| Environment | Path segment | API key prefix |
+| ----------- | ------------ | -------------- |
+| Production  | `prod`       | `ct_live_`     |
+| Development | `dev`        | `ct_test_`     |
+
+The key prefix **must** match the path environment. A `ct_test_` key against `/api/v1/prod/...` returns `401 Unauthorized`.
+
+## Response format
+
+Successful responses use a consistent envelope:
+
+```json
+{
+  "data": { },
+  "meta": {
+    "requestId": "req_abc123"
+  }
+}
+```
+
+Errors:
+
+```json
+{
+  "error": {
+    "code": "validation_error",
+    "message": "name is required"
+  },
+  "meta": {
+    "requestId": "req_abc123"
+  }
+}
+```
+
+## What you can do
+
+<CardGroup cols={2}>
+  <Card title="Courses & classes" icon="book" href="/coraltalk-apis/courses">
+    Create and manage courses and nested classes (CRUD)
+  </Card>
+  <Card title="Oral assessments" icon="microphone" href="/coraltalk-apis/oral-assessments">
+    Create voice-based oral exams assigned to a class
+  </Card>
+  <Card title="Roleplay" icon="masks-theater" href="/coraltalk-apis/roleplay">
+    Create scenario-based speaking practice for a class
+  </Card>
+  <Card title="VidTickets" icon="video" href="/coraltalk-apis/vid-tickets">
+    Create async video prompt assignments
+  </Card>
+  <Card title="Custom domains" icon="globe" href="/coraltalk-apis/custom-domains">
+    Host branded oral/roleplay exam pages on your domain
+  </Card>
+  <Card title="Authentication" icon="key" href="/coraltalk-apis/authentication">
+    API keys, environments, and request logs
+  </Card>
+</CardGroup>
+
+## Prerequisites
+
+Before calling the API:
+
+1. Your Coraltalk account must belong to an **organization** (not an independent teacher workspace).
+2. You must be an **organization admin** (`org:admin` in Clerk).
+3. Create an API key from **API Keys** in the organization sidebar at [app.coraltalk.com](https://app.coraltalk.com).
+
+## Quick example
+
+Create a course in production:
+
+```bash
+curl -X POST "https://app.coraltalk.com/api/v1/prod/courses" \
+  -H "Authorization: Bearer ct_live_YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Introduction to Biology", "level": "undergraduate"}'
+```
+
+See the [Quickstart](/coraltalk-apis/quickstart) for a full walkthrough: course → class → oral assessment → student exam link.
+
+## Out of scope (v1)
+
+- Teaching assistant / conversation APIs
+- Independent (non-org) teacher access
+- Webhook callbacks to your server (planned for a future release)
+- Full Coraltalk platform on a custom domain (custom domains serve **exam-taking pages only**)
