@@ -1,22 +1,28 @@
 ---
 title: "Student sign-in token"
-description: "Provision a student and return a Clerk sign-in token for custom domain exams."
+description: "Provision a student and return a Clerk sign-in token for custom domain exams via the Platform API."
 icon: "ticket"
 ---
 
 # Student sign-in token
 
-Use this endpoint from your **server** (with a Platform API key) when students take exams on a [custom domain](/coraltalk-apis/custom-domains). Clerk satellite mode blocks normal email-code sign-in on the exam hostname; your backend calls this API, then passes the returned `token` to the exam page for Clerk `strategy: "ticket"`.
+Provision or look up a student in a class and return a short-lived Clerk **sign-in token**. Use this when students take exams on a [custom domain](/coraltalk-apis/custom-domains), where Clerk satellite mode blocks normal email-code and OAuth sign-in.
 
-<Warning>
-  Never embed API keys in the browser. Call this route from your backend only.
-</Warning>
+Requires a [Platform API key](/coraltalk-apis/authentication). Call from your **server only** — never from the browser.
 
 ## Endpoints
 
 | Method | Path | Description |
 | ------ | ---- | ----------- |
 | `POST` | `/students/sign-in-token` | Provision student and return sign-in token |
+
+Full URL:
+
+```
+https://app.coraltalk.com/api/v1/{env}/students/sign-in-token
+```
+
+Use `prod` with `ct_live_` keys, or `dev` with `ct_test_` keys.
 
 ## Create sign-in token
 
@@ -61,16 +67,33 @@ curl -X POST "https://app.coraltalk.com/api/v1/prod/students/sign-in-token" \
 
 | Field | Description |
 | ----- | ----------- |
-| `token` | Pass to Clerk sign-in with `strategy: "ticket"` on the custom domain (expires in 10 minutes) |
+| `token` | Clerk sign-in token — use with `strategy: "ticket"` on the custom domain (expires in 10 minutes) |
 | `userId` | Clerk user ID |
 | `studentId` | Coraltalk student enrollment ID |
 | `created` | `true` if the student was newly enrolled in the class |
 
-The class must belong to your organization and match the API key environment (`dev` or `prod`). Use `classId` from [Classes](/coraltalk-apis/classes).
+## Behavior
+
+- The class must belong to your organization and match the API key environment.
+- If the student does not exist for that class, Coraltalk creates the Clerk user and enrollment.
+- If the student already exists (matched by email or `orgInternalId` within the class), a new token is issued for the existing account.
+- Class capacity limits apply; a full class returns `409` with code `conflict`.
+
+Use `classId` from [Classes](/coraltalk-apis/classes). For exam links, the class is usually the exam’s `taAgent` field.
+
+## Client usage
+
+After your backend receives `data.token`, the exam page on the custom domain completes sign-in:
+
+```typescript
+await signIn.create({ strategy: "ticket", ticket: token });
+await signIn.finalize({ /* navigate to exam */ });
+```
 
 ## Next steps
 
 - [Authentication](/coraltalk-apis/authentication)
 - [Custom domains](/coraltalk-apis/custom-domains)
 - [Oral assessments](/coraltalk-apis/oral-assessments)
+- [Roleplay](/coraltalk-apis/roleplay)
 - [Errors](/coraltalk-apis/errors)

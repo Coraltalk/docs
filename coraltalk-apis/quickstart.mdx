@@ -82,6 +82,25 @@ If you configure a [custom domain](/coraltalk-apis/custom-domains), use:
 https://exams.yourschool.edu/exam/{EXAM_ID}
 ```
 
+## Step 5 — Student sign-in (custom domains only)
+
+Skip this step if students use `app.coraltalk.com`. On a custom domain, your server provisions sign-in tokens via the Platform API:
+
+```bash
+curl -X POST "https://app.coraltalk.com/api/v1/prod/students/sign-in-token" \
+  -H "Authorization: Bearer ct_live_YOUR_LIVE_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "student@school.edu",
+    "firstName": "Ada",
+    "lastName": "Lovelace",
+    "orgInternalId": "roll-12345",
+    "classId": "CLASS_ID"
+  }'
+```
+
+Pass `data.token` to the exam page for Clerk `strategy: "ticket"`. Details: [Student sign-in token](/coraltalk-apis/student-sign-in-token).
+
 ## Next steps
 
 <CardGroup cols={2}>
@@ -90,6 +109,9 @@ https://exams.yourschool.edu/exam/{EXAM_ID}
   </Card>
   <Card title="VidTickets" icon="video" href="/coraltalk-apis/vid-tickets">
     Async video prompts with presigned uploads
+  </Card>
+  <Card title="Student sign-in token" icon="ticket" href="/coraltalk-apis/student-sign-in-token">
+    Sign in students on branded exam domains
   </Card>
   <Card title="Custom domains" icon="globe" href="/coraltalk-apis/custom-domains">
     Brand exam pages on your hostname

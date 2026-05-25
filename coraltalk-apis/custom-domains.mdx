@@ -49,4 +49,16 @@ https://exams.yourschool.edu/exam/{EXAM_ID}
 https://exams.yourschool.edu/exam/{EXAM_ID}/roleplay
 ```
 
-Platform API calls remain on `app.coraltalk.com/api/v1/...`. For student sign-in on custom domains, use [Student sign-in token](/coraltalk-apis/student-sign-in-token) from your server with a Platform API key.
+## Student sign-in (custom domains)
+
+Clerk **satellite mode** on your domain blocks normal email-code and OAuth sign-in. Your **backend** must call the Platform API (not the exam hostname):
+
+| Method | Path | Auth |
+| ------ | ---- | ---- |
+| `POST` | `/api/v1/prod/students/sign-in-token` | `Authorization: Bearer ct_live_...` |
+
+Return `data.token` to the exam page; the client signs in with Clerk `strategy: "ticket"`. See [Student sign-in token](/coraltalk-apis/student-sign-in-token) and [Authentication](/coraltalk-apis/authentication).
+
+<Warning>
+  Do not call a separate `/api/student/sign-in-token` route on the custom domain. All Platform API requests use `https://app.coraltalk.com/api/v1/{env}/`.
+</Warning>

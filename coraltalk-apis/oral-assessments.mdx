@@ -49,3 +49,7 @@ https://app.coraltalk.com/exam/{EXAM_ID}
 ```
 
 Or on a [custom domain](/coraltalk-apis/custom-domains): `https://exams.yourschool.edu/exam/{EXAM_ID}`
+
+## Custom domain sign-in
+
+On a custom domain, students cannot use the default Coraltalk login. Your server calls [Student sign-in token](/coraltalk-apis/student-sign-in-token) with your Platform API key, then passes `data.token` to the exam UI for Clerk ticket sign-in.
