@@ -3,13 +3,33 @@ title: "Student sign-in token"
 icon: "ticket"
 ---
 
-On a [custom domain](/coraltalk-apis/custom-domains), students cannot use email-code or OAuth sign-in directly. Call this endpoint on your exam hostname to enroll the student (if needed) and receive a short-lived Clerk sign-in token for the exam UI.
+On a [custom domain](/coraltalk-apis/custom-domains), students cannot use email-code or OAuth sign-in directly. This endpoint enrolls the student (if needed) and returns a short-lived Clerk sign-in token for the exam UI.
+
+## Platform API vs this route
+
+|              | [Platform API](/coraltalk-apis/overview)  | Student sign-in token                              |
+| ------------ | ----------------------------------------- | -------------------------------------------------- |
+| **Base URL** | `https://app.coraltalk.com/api/v1/{env}/` | Same Coraltalk app, **exam hostname**              |
+| **Auth**     | `Authorization: Bearer ct_live_...`       | None (custom domain only in production; see below) |
+| **Caller**   | Your server / integration                 | Exam page in the **student’s browser**             |
+| **Purpose**  | Manage courses, classes, assessments      | Sign in a student taking an exam                   |
+
+This is **not** a separate API product on `exams.yourschool.edu`. Custom domains point at the same deployment; only the **host** changes. Exam code should call a **same-origin** path:
+
+```
+POST /api/student/sign-in-token
+```
+
+That resolves to your custom domain in production (for example `https://exams.yourschool.edu/api/student/sign-in-token`) or to `https://app.coraltalk.com/...` when the student opens the exam on the platform host.
 
 <Warning>
-  This route lives on your **custom domain**
-  (`https://exams.yourschool.edu/api/...`). It is not part of the Platform API
-  on `app.coraltalk.com/api/v1/...` and does not use an API key.
+  In production, `POST /api/student/sign-in-token` on **`app.coraltalk.com`
+  returns `403`**. It is only enabled for verified custom domains (and
+  `localhost` in development). Do not call it from `app.coraltalk.com` in a live
+  custom-domain exam flow.
 </Warning>
+
+Platform API keys must not be embedded in exam pages. Server integrations should keep using `/api/v1/...` on `app.coraltalk.com` to create classes and assessments; student sign-in stays on the exam host.
 
 ## Endpoints
 
@@ -28,6 +48,8 @@ On a [custom domain](/coraltalk-apis/custom-domains), students cannot use email-
 | `classId`       | Yes      | Class ID                                            |
 | `courseId`      | No       | Course ID                                           |
 
+**Custom domain (production exam flow):**
+
 ```bash
 curl -X POST "https://exams.yourschool.edu/api/student/sign-in-token" \
   -H "Content-Type: application/json" \
@@ -38,6 +60,20 @@ curl -X POST "https://exams.yourschool.edu/api/student/sign-in-token" \
     "orgInternalId": "roll-12345",
     "classId": "CLASS_ID",
     "courseId": "COURSE_ID"
+  }'
+```
+
+**Platform host (local development only):**
+
+```bash
+curl -X POST "http://localhost:3000/api/student/sign-in-token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "student@school.edu",
+    "firstName": "Ada",
+    "lastName": "Lovelace",
+    "orgInternalId": "roll-12345",
+    "classId": "CLASS_ID"
   }'
 ```
 
