@@ -8,11 +8,13 @@ icon: "globe"
 
 Organizations can configure a **custom domain** so students take oral assessments and roleplay on your hostname with your logo, company name, and post-exam redirect URL.
 
-<Warning>
-  Custom domains serve **exam-taking pages only** — not the full Coraltalk platform. Admin, billing, API keys, VidTickets, and other routes return **404** on your custom domain.
-</Warning>
+<Note>
+  Custom domains primarily serve student exam pages (`/exam/{id}` and its sub-routes). Other routes resolve, but admin, billing, and API key management are still managed from `app.coraltalk.com`.
+</Note>
 
-## Allowed routes on custom domains
+## Common student routes
+
+The routes below are the ones you typically link students to. They work on both `app.coraltalk.com` and your custom domain.
 
 | Path | Purpose |
 | ---- | ------- |
@@ -31,6 +33,16 @@ Organizations can configure a **custom domain** so students take oral assessment
 5. Click **Verify** and wait for DNS propagation.
 6. Configure white-label: company name, logo, post-exam redirect URL.
 7. Choose **Applies to**: oral assessments, roleplay, or both.
+
+The **Applies to** setting controls which exam types open on your custom domain:
+
+| Setting | Oral assessment links | Roleplay links |
+| ------- | --------------------- | -------------- |
+| `oral_assessment` | ✅ | ❌ |
+| `roleplay` | ❌ | ✅ |
+| `both` | ✅ | ✅ |
+
+Exam links whose type does not match **Applies to** continue to work on `app.coraltalk.com`.
 
 ## DNS example
 
