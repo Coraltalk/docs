@@ -75,7 +75,10 @@
           },
           {
             "group": "Custom domains",
-            "pages": ["coraltalk-apis/custom-domains"]
+            "pages": [
+              "coraltalk-apis/custom-domains",
+              "coraltalk-apis/student-sign-in-token"
+            ]
           }
         ]
       }

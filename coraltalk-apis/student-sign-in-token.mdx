@@ -1,0 +1,69 @@
+---
+title: "Student sign-in token"
+icon: "ticket"
+---
+
+On a [custom domain](/coraltalk-apis/custom-domains), students cannot use email-code or OAuth sign-in directly. Call this endpoint on your exam hostname to enroll the student (if needed) and receive a short-lived Clerk sign-in token for the exam UI.
+
+<Warning>
+  This route lives on your **custom domain**
+  (`https://exams.yourschool.edu/api/...`). It is not part of the Platform API
+  on `app.coraltalk.com/api/v1/...` and does not use an API key.
+</Warning>
+
+## Endpoints
+
+| Method | Path                         | Description                                |
+| ------ | ---------------------------- | ------------------------------------------ |
+| `POST` | `/api/student/sign-in-token` | Provision student and return sign-in token |
+
+## Create sign-in token
+
+| Field           | Required | Description                                         |
+| --------------- | -------- | --------------------------------------------------- |
+| `email`         | Yes      | Student email                                       |
+| `firstName`     | Yes      | Given name                                          |
+| `lastName`      | Yes      | Family name                                         |
+| `orgInternalId` | Yes      | Your student identifier (roll number, SIS id, etc.) |
+| `classId`       | Yes      | Class ID                                            |
+| `courseId`      | No       | Course ID                                           |
+
+```bash
+curl -X POST "https://exams.yourschool.edu/api/student/sign-in-token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "student@school.edu",
+    "firstName": "Ada",
+    "lastName": "Lovelace",
+    "orgInternalId": "roll-12345",
+    "classId": "CLASS_ID",
+    "courseId": "COURSE_ID"
+  }'
+```
+
+### Response
+
+```json
+{
+  "token": "signin_xxxxxxxx",
+  "userId": "user_xxxxxxxx",
+  "studentId": "674a1b2c3d4e5f6789012345",
+  "created": true
+}
+```
+
+| Field       | Description                                                             |
+| ----------- | ----------------------------------------------------------------------- |
+| `token`     | Pass to Clerk sign-in with `strategy: "ticket"` (expires in 10 minutes) |
+| `userId`    | Clerk user ID                                                           |
+| `studentId` | Coraltalk student enrollment ID                                         |
+| `created`   | `true` if the student was newly enrolled in the class                   |
+
+Use `classId` from [Classes](/coraltalk-apis/classes) or from the exam’s `taAgent` field when building your exam flow.
+
+## Next steps
+
+- [Custom domains](/coraltalk-apis/custom-domains)
+- [Oral assessments](/coraltalk-apis/oral-assessments)
+- [Roleplay](/coraltalk-apis/roleplay)
+- [Errors](/coraltalk-apis/errors)
