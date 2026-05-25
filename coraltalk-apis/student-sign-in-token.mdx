@@ -1,57 +1,37 @@
 ---
 title: "Student sign-in token"
+description: "Provision a student and return a Clerk sign-in token for custom domain exams."
 icon: "ticket"
 ---
 
-On a [custom domain](/coraltalk-apis/custom-domains), students cannot use email-code or OAuth sign-in directly. This endpoint enrolls the student (if needed) and returns a short-lived Clerk sign-in token for the exam UI.
+# Student sign-in token
 
-## Platform API vs this route
-
-|              | [Platform API](/coraltalk-apis/overview)  | Student sign-in token                              |
-| ------------ | ----------------------------------------- | -------------------------------------------------- |
-| **Base URL** | `https://app.coraltalk.com/api/v1/{env}/` | Same Coraltalk app, **exam hostname**              |
-| **Auth**     | `Authorization: Bearer ct_live_...`       | None (custom domain only in production; see below) |
-| **Caller**   | Your server / integration                 | Exam page in the **student’s browser**             |
-| **Purpose**  | Manage courses, classes, assessments      | Sign in a student taking an exam                   |
-
-This is **not** a separate API product on `exams.yourschool.edu`. Custom domains point at the same deployment; only the **host** changes. Exam code should call a **same-origin** path:
-
-```
-POST /api/student/sign-in-token
-```
-
-That resolves to your custom domain in production (for example `https://exams.yourschool.edu/api/student/sign-in-token`) or to `https://app.coraltalk.com/...` when the student opens the exam on the platform host.
+Use this endpoint from your **server** (with a Platform API key) when students take exams on a [custom domain](/coraltalk-apis/custom-domains). Clerk satellite mode blocks normal email-code sign-in on the exam hostname; your backend calls this API, then passes the returned `token` to the exam page for Clerk `strategy: "ticket"`.
 
 <Warning>
-  In production, `POST /api/student/sign-in-token` on **`app.coraltalk.com`
-  returns `403`**. It is only enabled for verified custom domains (and
-  `localhost` in development). Do not call it from `app.coraltalk.com` in a live
-  custom-domain exam flow.
+  Never embed API keys in the browser. Call this route from your backend only.
 </Warning>
-
-Platform API keys must not be embedded in exam pages. Server integrations should keep using `/api/v1/...` on `app.coraltalk.com` to create classes and assessments; student sign-in stays on the exam host.
 
 ## Endpoints
 
-| Method | Path                         | Description                                |
-| ------ | ---------------------------- | ------------------------------------------ |
-| `POST` | `/api/student/sign-in-token` | Provision student and return sign-in token |
+| Method | Path | Description |
+| ------ | ---- | ----------- |
+| `POST` | `/students/sign-in-token` | Provision student and return sign-in token |
 
 ## Create sign-in token
 
-| Field           | Required | Description                                         |
-| --------------- | -------- | --------------------------------------------------- |
-| `email`         | Yes      | Student email                                       |
-| `firstName`     | Yes      | Given name                                          |
-| `lastName`      | Yes      | Family name                                         |
-| `orgInternalId` | Yes      | Your student identifier (roll number, SIS id, etc.) |
-| `classId`       | Yes      | Class ID                                            |
-| `courseId`      | No       | Course ID                                           |
-
-**Custom domain (production exam flow):**
+| Field | Required | Description |
+| ----- | -------- | ----------- |
+| `email` | Yes | Student email |
+| `firstName` | Yes | Given name |
+| `lastName` | Yes | Family name |
+| `orgInternalId` | Yes | Your student identifier (roll number, SIS id, etc.) |
+| `classId` | Yes | Class ID |
+| `courseId` | No | Course ID |
 
 ```bash
-curl -X POST "https://exams.yourschool.edu/api/student/sign-in-token" \
+curl -X POST "https://app.coraltalk.com/api/v1/prod/students/sign-in-token" \
+  -H "Authorization: Bearer ct_live_YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "email": "student@school.edu",
@@ -63,43 +43,34 @@ curl -X POST "https://exams.yourschool.edu/api/student/sign-in-token" \
   }'
 ```
 
-**Platform host (local development only):**
-
-```bash
-curl -X POST "http://localhost:3000/api/student/sign-in-token" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "student@school.edu",
-    "firstName": "Ada",
-    "lastName": "Lovelace",
-    "orgInternalId": "roll-12345",
-    "classId": "CLASS_ID"
-  }'
-```
-
 ### Response
 
 ```json
 {
-  "token": "signin_xxxxxxxx",
-  "userId": "user_xxxxxxxx",
-  "studentId": "674a1b2c3d4e5f6789012345",
-  "created": true
+  "data": {
+    "token": "signin_xxxxxxxx",
+    "userId": "user_xxxxxxxx",
+    "studentId": "674a1b2c3d4e5f6789012345",
+    "created": true
+  },
+  "meta": {
+    "requestId": "req_abc123"
+  }
 }
 ```
 
-| Field       | Description                                                             |
-| ----------- | ----------------------------------------------------------------------- |
-| `token`     | Pass to Clerk sign-in with `strategy: "ticket"` (expires in 10 minutes) |
-| `userId`    | Clerk user ID                                                           |
-| `studentId` | Coraltalk student enrollment ID                                         |
-| `created`   | `true` if the student was newly enrolled in the class                   |
+| Field | Description |
+| ----- | ----------- |
+| `token` | Pass to Clerk sign-in with `strategy: "ticket"` on the custom domain (expires in 10 minutes) |
+| `userId` | Clerk user ID |
+| `studentId` | Coraltalk student enrollment ID |
+| `created` | `true` if the student was newly enrolled in the class |
 
-Use `classId` from [Classes](/coraltalk-apis/classes) or from the exam’s `taAgent` field when building your exam flow.
+The class must belong to your organization and match the API key environment (`dev` or `prod`). Use `classId` from [Classes](/coraltalk-apis/classes).
 
 ## Next steps
 
+- [Authentication](/coraltalk-apis/authentication)
 - [Custom domains](/coraltalk-apis/custom-domains)
 - [Oral assessments](/coraltalk-apis/oral-assessments)
-- [Roleplay](/coraltalk-apis/roleplay)
 - [Errors](/coraltalk-apis/errors)

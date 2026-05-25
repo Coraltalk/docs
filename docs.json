@@ -70,15 +70,13 @@
               "coraltalk-apis/classes",
               "coraltalk-apis/oral-assessments",
               "coraltalk-apis/roleplay",
-              "coraltalk-apis/vid-tickets"
+              "coraltalk-apis/vid-tickets",
+              "coraltalk-apis/student-sign-in-token"
             ]
           },
           {
             "group": "Custom domains",
-            "pages": [
-              "coraltalk-apis/custom-domains",
-              "coraltalk-apis/student-sign-in-token"
-            ]
+            "pages": ["coraltalk-apis/custom-domains"]
           }
         ]
       }
