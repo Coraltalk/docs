@@ -29,8 +29,23 @@ Organizations can configure a **custom domain** so students take oral assessment
 3. Enter your hostname (e.g. `exams.yourschool.edu`).
 4. Add the CNAME record shown at your DNS provider.
 5. Click **Verify** and wait for DNS propagation.
-6. Configure white-label: company name, logo, post-exam redirect URL.
+6. Configure white-label: company name, logo, favicon, and post-exam redirect URL.
 7. Choose **Applies to**: oral assessments, roleplay, or both.
+
+<Note>
+  Each organization can have **one custom domain**. To switch to a different hostname, remove the existing domain first.
+</Note>
+
+## White-label assets
+
+Upload branding directly from the admin UI, or paste a URL to an image you host yourself.
+
+| Asset | Where it appears | Accepted formats | Max size |
+| ----- | ---------------- | ---------------- | -------- |
+| Logo | Student exam pages | PNG, JPG, SVG, WebP | 2 MB |
+| Favicon | Browser tab on your custom domain | PNG, ICO, SVG | 512 KB |
+
+To upload, open the white-label settings for your domain, select **Upload** next to **Logo** or **Favicon**, and choose a file. Uploaded assets are served from Coraltalk's CDN and applied immediately. Use **Remove** to clear an asset, or switch back to the URL field to point at an externally hosted image.
 
 ## DNS example
 
