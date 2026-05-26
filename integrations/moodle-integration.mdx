@@ -1,0 +1,251 @@
+---
+title: "Moodle LMS integration"
+description: "Connect Coraltalk with Moodle to import courses, sync rosters, link assignments, and push grades back to your gradebook."
+icon: "graduation-cap"
+---
+
+Coraltalk connects to Moodle through Moodle's REST web services, letting you import course content into your knowledge library, sync class rosters, link Coraltalk oral assignments to existing Moodle assignments, and push grades back to the Moodle gradebook.
+
+## Integration benefits
+
+<CardGroup cols={2}>
+  <Card title="Course content import" icon="folder-arrow-down">
+    Pull PDFs, Word docs, slides, and text files from a Moodle course into your Coraltalk knowledge library.
+  </Card>
+
+  <Card title="Roster sync" icon="users">
+    Match Moodle enrollments to Coraltalk students so you don't re-invite anyone manually.
+  </Card>
+
+  <Card title="Assignment linking" icon="link">
+    Link a Coraltalk oral assignment to an existing Moodle assignment in one click.
+  </Card>
+
+  <Card title="Grade sync" icon="arrow-right-arrow-left">
+    Push individual or bulk grades from Coraltalk straight to the Moodle gradebook.
+  </Card>
+</CardGroup>
+
+## What's supported
+
+| Capability | Moodle | Canvas |
+|---|---|---|
+| Connect with a web service token | ✓ | ✓ |
+| Import course files into the knowledge library | ✓ | ✓ |
+| Roster sync and manual student linking | ✓ | ✓ |
+| Link to an **existing** assignment | ✓ | ✓ |
+| **Create a new** LMS assignment from Coraltalk | — | ✓ |
+| Individual grade sync | ✓ | ✓ |
+| Bulk grade sync | ✓ | ✓ |
+
+<Info>
+Creating a brand-new Moodle assignment from inside Coraltalk isn't supported yet. Create the assignment in Moodle first, then link to it from Coraltalk.
+</Info>
+
+## Prerequisites
+
+Before you connect Moodle, make sure you have:
+
+<Steps>
+  <Step title="A Moodle admin who can issue tokens">
+    Token creation usually requires Moodle site administrator access.
+  </Step>
+
+  <Step title="A REST web service token">
+    A token scoped to an external service that includes the functions Coraltalk needs (see below).
+  </Step>
+
+  <Step title="Your Moodle site URL">
+    The full URL of your Moodle site, including any subpath, for example `https://learn.yourschool.edu/moodle`.
+  </Step>
+</Steps>
+
+## Required web service functions
+
+When your Moodle admin creates the external service for Coraltalk, it needs to expose these function groups:
+
+- **Site info** — `core_webservice_get_site_info`
+- **Courses and content** — `core_course_get_courses`, `core_course_get_contents`
+- **Enrollments** — `core_enrol_get_enrolled_users`
+- **Assignments** — `mod_assign_get_assignments`, `mod_assign_save_grade`
+- **Bulk grades (optional, recommended)** — `mod_assign_save_grades`
+
+<Tip>
+If `mod_assign_save_grades` isn't enabled, Coraltalk falls back to syncing grades one student at a time. Bulk sync still works, just slower.
+</Tip>
+
+## Generate a Moodle web service token
+
+Have your Moodle admin do the following:
+
+<Steps>
+  <Step title="Enable web services">
+    Go to **Site administration → Advanced features** and turn on **Enable web services**.
+  </Step>
+
+  <Step title="Enable the REST protocol">
+    Go to **Site administration → Server → Web services → Manage protocols** and enable **REST protocol**.
+  </Step>
+
+  <Step title="Create an external service">
+    Go to **Site administration → Server → Web services → External services → Add**.
+
+    Name it something like `Coraltalk`, mark it **Enabled**, and add the functions listed in [Required web service functions](#required-web-service-functions).
+  </Step>
+
+  <Step title="Authorize a user">
+    On the external service, click **Authorised users** and add the Moodle user the token will belong to. This user must have grading and course-view permission in every course you plan to sync.
+  </Step>
+
+  <Step title="Create the token">
+    Go to **Site administration → Server → Web services → Manage tokens → Create token**.
+
+    Select the authorised user, the `Coraltalk` external service, and save. Copy the token — you won't see it again.
+  </Step>
+</Steps>
+
+## Connect Moodle in Coraltalk
+
+<Steps>
+  <Step title="Open integrations">
+    Sign in to Coraltalk as a teacher or org admin and go to **Integrations**.
+  </Step>
+
+  <Step title="Pick Moodle">
+    Find the **Moodle** card and select **Connect**.
+  </Step>
+
+  <Step title="Enter your site URL and token">
+    - **Moodle URL** — your full site URL, including any `/moodle` subpath, for example `https://learn.yourschool.edu/moodle`.
+    - **Web service token** — paste the token from the previous section.
+
+    Select **Connect**.
+  </Step>
+
+  <Step title="Pick a default course">
+    Choose the Moodle course you want this Coraltalk class to mirror. You can change this later from the integrations panel.
+  </Step>
+</Steps>
+
+Once connected, the **Moodle** card shows your connected user, the linked course, and the last sync time.
+
+## Import course content
+
+Use Moodle as a source for your knowledge library so the teaching assistant and oral assignments can ground answers in your real course materials.
+
+<Steps>
+  <Step title="Open the knowledge library">
+    From your class, go to **Customize → Knowledge library**.
+  </Step>
+
+  <Step title="Choose Moodle as the source">
+    Select **Import from Moodle** in the sidebar.
+  </Step>
+
+  <Step title="Pick files to import">
+    Browse the connected Moodle course and select the files you want. Supported types: `.pdf`, `.docx`, `.pptx`, `.doc`, `.txt`.
+  </Step>
+</Steps>
+
+<Info>
+Files that aren't in a supported format are hidden from the picker. If you don't see a file you expect, check that it's one of the supported types and that the token's user can view it in Moodle.
+</Info>
+
+## Sync your class roster
+
+<Steps>
+  <Step title="Open your class">
+    Go to **Class list** for the class linked to Moodle.
+  </Step>
+
+  <Step title="Sync students">
+    Select **Sync students from Moodle**. Coraltalk pulls enrollments from the linked Moodle course and auto-matches them to existing Coraltalk students by email.
+  </Step>
+
+  <Step title="Resolve unmatched students">
+    For any student that didn't auto-match, use **Link to Moodle user** in the class list and pick the right Moodle user manually.
+  </Step>
+</Steps>
+
+## Link a Coraltalk assignment to a Moodle assignment
+
+<Steps>
+  <Step title="Create the assignment in Moodle">
+    In your Moodle course, create the assignment you want grades to land in.
+  </Step>
+
+  <Step title="Open the Coraltalk assignment">
+    In Coraltalk, open the oral assignment you want to link.
+  </Step>
+
+  <Step title="Link to Moodle">
+    Select **Link to Moodle assignment**, pick the matching Moodle assignment, and save.
+  </Step>
+</Steps>
+
+Once linked, the assignment shows a Moodle badge in the class list and submissions view.
+
+## Grade sync
+
+Grades flow from Coraltalk to Moodle, never the other direction.
+
+| Trigger | What syncs |
+|---|---|
+| Coral finishes evaluating a submission | The numeric grade is pushed to Moodle for that student. |
+| Teacher overrides a grade in Coraltalk | The new grade replaces the previous value in Moodle. |
+| Teacher selects **Sync all grades** on an assignment | Every linked submission is pushed in a single bulk request. |
+
+<Warning>
+Edit grades in **Coraltalk**, not Moodle. Coraltalk treats itself as the source of truth and any manual edit you make directly in the Moodle gradebook will be overwritten on the next sync.
+</Warning>
+
+### Sync a single grade
+
+From the submissions view, select **Sync to Moodle** on the row you want to push.
+
+### Sync all grades
+
+From the assignment header, select **Sync all to Moodle**. Coraltalk uses Moodle's bulk grade endpoint when available and falls back to one-at-a-time syncing otherwise.
+
+## Disconnect Moodle
+
+From **Integrations → Moodle**, select **Disconnect**. This removes the stored token and stops any further syncs. Existing imported files, linked assignments, and previously synced grades stay in place.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="'Failed to connect Moodle' when saving the token">
+    **Check**:
+    1. The site URL includes the protocol and any subpath, for example `https://learn.yourschool.edu/moodle`, not just the domain.
+    2. The token belongs to a user that's listed under the external service's **Authorised users**.
+    3. The REST protocol is enabled in **Site administration → Server → Web services → Manage protocols**.
+  </Accordion>
+
+  <Accordion title="No courses appear in the picker">
+    The token's user must be enrolled in the course with at least teacher-level permission. Add them to the course in Moodle and reconnect.
+  </Accordion>
+
+  <Accordion title="Files I expect are missing from the import picker">
+    Coraltalk only imports `.pdf`, `.docx`, `.pptx`, `.doc`, and `.txt` files. Anything else, including links and labels, is filtered out.
+  </Accordion>
+
+  <Accordion title="Grade sync fails for one student">
+    The linked Moodle user may have been unenrolled from the course. Re-sync the roster and use **Link to Moodle user** to point the Coraltalk student at the correct Moodle account.
+  </Accordion>
+
+  <Accordion title="Bulk grade sync is slow or partial">
+    Your Moodle external service might not include `mod_assign_save_grades`. Ask your Moodle admin to add it, then try again. Without it, Coraltalk falls back to per-student sync.
+  </Accordion>
+</AccordionGroup>
+
+## Related guides
+
+<CardGroup cols={2}>
+  <Card title="Canvas LMS integration" icon="link" href="/integrations/canvas-integration">
+    Set up Canvas the same way you set up Moodle.
+  </Card>
+
+  <Card title="For teachers" icon="chalkboard-user" href="/getting-started/for-teachers">
+    Teacher onboarding guide.
+  </Card>
+</CardGroup>
