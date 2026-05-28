@@ -29,7 +29,7 @@ The Platform API uses standard HTTP status codes and a consistent JSON error bod
 | ------ | ------- |
 | `400` | Bad request — missing field or invalid payload |
 | `401` | Unauthorized — invalid, revoked, or env-mismatched API key |
-| `403` | Forbidden — resource belongs to another org |
+| `403` | Forbidden — resource belongs to another org, or your organization isn't on a volume-based pricing plan |
 | `404` | Not found |
 | `429` | Rate limit exceeded |
 | `500` | Server error — retry with backoff |
