@@ -26,7 +26,8 @@ A **roleplay** is a scenario-based speaking assignment where students practice a
 | `classId` | Yes | Class ID |
 | `roleplayStudentRole` | Yes | Student's role |
 | `roleplayCoralRole` | Yes | Coral's role |
-| `roleplayScenario` | Yes | Scenario description |
+| `roleplayScenario` | Yes | What the student will play (the student-side scenario/context). Min `150`, max `3000` characters. |
+| `roleplayScenarioDetails` | Yes | How you want CoralTalk to perform (tone, behavior, constraints, response style). Min `300`, max `6000` characters. |
 | `roleplayDuration` | No | Max duration (seconds, default `600`) |
 
 ```bash
@@ -38,7 +39,8 @@ curl -X POST "https://app.coraltalk.com/api/v1/prod/roleplay" \
     "classId": "CLASS_ID",
     "roleplayStudentRole": "Job candidate",
     "roleplayCoralRole": "Hiring manager",
-    "roleplayScenario": "Negotiate a starting salary"
+    "roleplayScenario": "You are a job candidate negotiating a starting salary.",
+    "roleplayScenarioDetails": "CoralTalk should act as a professional but budget-conscious hiring manager, ask clarifying questions, and offer a counterproposal before agreeing."
   }'
 ```
 
