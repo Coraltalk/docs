@@ -10,7 +10,7 @@ Authenticate every Platform API request with a **Bearer token** API key created 
 
 ## Prerequisites
 
-Platform API access is available to organizations on a **volume-based pricing plan**. If your organization isn't on volume-based pricing, **Create key** returns a `403` with the message _"APIs would only work Volume based pricing. Please contact Coraltalk Support Team."_
+Platform API access is available to organizations on a **volume-based pricing plan**. If your organization isn't on volume-based pricing, **Create key** fails with a `403` and the error code `volume_pricing_required`.
 
 Contact [support@coraltalk.com](mailto:support@coraltalk.com) to enable volume-based pricing before creating keys.
 
