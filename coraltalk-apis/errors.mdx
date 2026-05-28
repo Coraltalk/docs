@@ -29,10 +29,23 @@ The Platform API uses standard HTTP status codes and a consistent JSON error bod
 | ------ | ------- |
 | `400` | Bad request — missing field or invalid payload |
 | `401` | Unauthorized — invalid, revoked, or env-mismatched API key |
-| `403` | Forbidden — resource belongs to another org |
+| `403` | Forbidden — resource belongs to another org, or your organization isn't on a volume-based pricing plan |
 | `404` | Not found |
 | `429` | Rate limit exceeded |
 | `500` | Server error — retry with backoff |
+
+## Error codes
+
+The `error.code` field is stable — branch on it instead of parsing `message`.
+
+| Code | Status | Meaning |
+| ---- | ------ | ------- |
+| `validation_error` | `400` | A field is missing or invalid. Check `error.field`. |
+| `unauthorized` | `401` | API key is missing, revoked, or doesn't match the environment. |
+| `forbidden` | `403` | The resource belongs to another organization. |
+| `volume_pricing_required` | `403` | Your organization isn't on a volume-based pricing plan. Contact [support@coraltalk.com](mailto:support@coraltalk.com) to enable it. |
+| `not_found` | `404` | The resource doesn't exist or isn't visible to this key. |
+| `rate_limited` | `429` | Too many requests. Back off and retry. |
 
 ## Support
 

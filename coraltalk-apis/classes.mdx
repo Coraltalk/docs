@@ -25,7 +25,7 @@ A **class** is a teaching workspace inside a course. Assessments are assigned to
 | `name` | Yes | — | Class display name |
 | `startDate` | No | — | ISO 8601 start date |
 | `endDate` | No | — | ISO 8601 end date |
-| `classMode` | No | `"in-person"` | `"in-person"`, `"online"`, or `"hybrid"` |
+| `classMode` | No | `"hybrid"` | `"in-person"`, `"online"`, or `"hybrid"` |
 
 ```bash
 curl -X POST "https://app.coraltalk.com/api/v1/prod/courses/COURSE_ID/classes" \
@@ -38,6 +38,10 @@ curl -X POST "https://app.coraltalk.com/api/v1/prod/courses/COURSE_ID/classes" \
 ```
 
 Use the returned `_id` as `classId` when creating assessments.
+
+<Note>
+  Creating a class requires your organization to be on a volume-based pricing plan. Requests from other orgs return `403` with the error code `volume_pricing_required`. See [Errors](/coraltalk-apis/errors).
+</Note>
 
 ## Next steps
 
