@@ -26,7 +26,38 @@ An **oral assessment** is a voice-based exam where students converse with Coral 
 | `classId` | Yes | — | Class ID |
 | `duration` | No | `600` | Max duration (seconds) |
 | `examType` | No | `"Generic"` | `"Generic"`, `"Personalized"`, or `"Hybrid"` |
-| `questions` | No | — | Array of `{ id, text }` |
+| `examDescription` | No | `""` | Assessment topic/context |
+| `instructions` | No | `""` | Additional student instructions |
+| `language` | No | `"en"` | Language code |
+| `questions` | No | Fallback generated question | Array of `{ id, text }` |
+| `isDraft` | No | `false` | Save as draft instead of publish-ready |
+| `isGraded` | No | `true` | Enable/disable grading |
+| `isOpenBook` | No | `false` | Allow resource usage during exam |
+| `isAllowRetake` | No | `false` | Allow student retakes |
+| `hideEvaluationFromStudent` | No | `false` | Hide evaluation block from student view |
+| `hideGradeFromStudent` | No | `false` | Hide grade while still allowing feedback |
+| `evaluationDifficulty` | No | `"Practice"` | Evaluation strictness preset |
+| `evaluationStrategy` | No | `"ai-rubric"` | `"ai-rubric"`, `"model-answer"`, or `"curriculum"` |
+| `criteria` | No | AI rubric defaults | Rubric config (`rubricType`, `selectedCurriculumItems`, `successCriteria`, etc.) |
+| `scoringLevels` | No | Platform defaults | Custom score bands |
+| `evaluationRubricDescriptors` | No | — | Descriptor matrix for AI rubric strategy |
+| `modelAnswers` | No | — | Map of model answers keyed by question id |
+
+### Supported `language` codes
+
+Use one of the following values for the `language` field:
+
+| Code | Language |
+| ---- | -------- |
+| `en` | English |
+| `ar` | Arabic |
+| `fr` | French |
+| `it` | Italian |
+| `de` | German |
+| `tr` | Turkish |
+| `es` | Spanish |
+| `vn` | Vietnamese |
+| `cn` | Chinese |
 
 ```bash
 curl -X POST "https://app.coraltalk.com/api/v1/prod/oral-assessments" \
@@ -36,6 +67,21 @@ curl -X POST "https://app.coraltalk.com/api/v1/prod/oral-assessments" \
     "name": "Midterm Oral Exam",
     "classId": "CLASS_ID",
     "duration": 900,
+    "examDescription": "Discuss key biological processes with clear examples.",
+    "instructions": "Answer each question in 2-3 minutes with one real-world example.",
+    "language": "en",
+    "isGraded": true,
+    "isOpenBook": false,
+    "isAllowRetake": true,
+    "hideEvaluationFromStudent": false,
+    "hideGradeFromStudent": false,
+    "evaluationStrategy": "ai-rubric",
+    "evaluationDifficulty": "Practice",
+    "criteria": {
+      "rubricType": "ai",
+      "selectedCurriculumItems": ["Concept clarity", "Evidence use"],
+      "successCriteria": "Clear structure, accurate terminology, concrete examples."
+    },
     "questions": [
       { "id": "1", "text": "Explain cellular respiration." }
     ]
