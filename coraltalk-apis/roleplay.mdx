@@ -29,6 +29,8 @@ A **roleplay** is a scenario-based speaking assignment where students practice a
 | `roleplayScenario` | Yes | What the student will play (the student-side scenario/context). Min `150`, max `3000` characters. |
 | `roleplayScenarioDetails` | Yes | How you want CoralTalk to perform (tone, behavior, constraints, response style). Min `300`, max `6000` characters. |
 | `roleplayDuration` | No | Max duration (seconds, default `600`) |
+| `roleplayLanguage` | No | Conversation language code (default `en`) |
+| `isDraft` | No | Save as a draft instead of publishing (default `false`) |
 
 ```bash
 curl -X POST "https://app.coraltalk.com/api/v1/prod/roleplay" \
