@@ -20,13 +20,51 @@ An **oral assessment** is a voice-based exam where students converse with Coral 
 
 ## Create
 
+`POST /oral-assessments` accepts the same basic and advanced settings as the in-app create flow. Only `name` and `classId` are required; omit advanced fields to keep platform defaults.
+
+### Core fields
+
 | Field | Required | Default | Description |
 | ----- | -------- | ------- | ----------- |
 | `name` | Yes | — | Assessment title |
 | `classId` | Yes | — | Class ID |
 | `duration` | No | `600` | Max duration (seconds) |
 | `examType` | No | `"Generic"` | `"Generic"`, `"Personalized"`, or `"Hybrid"` |
-| `questions` | No | — | Array of `{ id, text }` |
+| `questions` | No | — | Array of `{ id, text }`. If omitted, a fallback question is created. |
+| `isDraft` | No | `false` | Save as draft instead of publishing |
+
+### Content and student options
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `examDescription` | string | Topic or context shown to students and evaluators |
+| `instructions` | string | Additional instructions for students |
+| `language` | string | Assessment language code (defaults to `en`) |
+| `isGraded` | boolean | Whether submissions are graded |
+| `isOpenBook` | boolean | Allow learners to use resources during the assessment |
+| `isAllowRetake` | boolean | Allow learners to retake the assessment |
+| `hideEvaluationFromStudent` | boolean | Hide evaluation details from students |
+| `hideGradeFromStudent` | boolean | Hide the grade while still showing feedback |
+
+### Evaluation fields
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `evaluationDifficulty` | string | Evaluation difficulty preset |
+| `evaluationStrategy` | string | One of `ai-rubric`, `model-answer`, or `curriculum` |
+| `criteria` | object | Rubric criteria configuration (see below) |
+| `scoringLevels` | array | Custom scoring bands as `{ key, label, color, minScore, maxScore }` |
+| `evaluationRubricDescriptors` | array | Predefined rubric descriptors (use with `ai-rubric`) |
+| `modelAnswers` | object | Model answers keyed by question id (use with `model-answer`) |
+
+`criteria` accepts:
+
+- `rubricType` — `"teacher"`, `"ai"`, or `null`
+- `teacherAssignmentFile` — file reference when `rubricType` is `teacher`
+- `selectedCurriculumItems` — array of curriculum item IDs
+- `successCriteria` — free-text success criteria
+
+### Basic example
 
 ```bash
 curl -X POST "https://app.coraltalk.com/api/v1/prod/oral-assessments" \
@@ -38,6 +76,46 @@ curl -X POST "https://app.coraltalk.com/api/v1/prod/oral-assessments" \
     "duration": 900,
     "questions": [
       { "id": "1", "text": "Explain cellular respiration." }
+    ]
+  }'
+```
+
+### Advanced example
+
+Create a graded assessment that uses an AI rubric and hides grades from students until release:
+
+```bash
+curl -X POST "https://app.coraltalk.com/api/v1/prod/oral-assessments" \
+  -H "Authorization: Bearer ct_live_YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Cell Biology Oral",
+    "classId": "CLASS_ID",
+    "duration": 900,
+    "examType": "Generic",
+    "examDescription": "Students explain core cellular respiration concepts.",
+    "instructions": "Speak clearly. You have 15 minutes.",
+    "language": "en",
+    "isGraded": true,
+    "isOpenBook": false,
+    "isAllowRetake": false,
+    "hideGradeFromStudent": true,
+    "evaluationStrategy": "ai-rubric",
+    "evaluationDifficulty": "standard",
+    "questions": [
+      { "id": "1", "text": "Describe the stages of cellular respiration." }
+    ],
+    "evaluationRubricDescriptors": [
+      {
+        "criterion": "Conceptual accuracy",
+        "levelDescriptors": {
+          "exceeds": "Explains all stages with correct terminology.",
+          "meets": "Explains most stages correctly.",
+          "approaching": "Names stages but mixes up details."
+        },
+        "keyIndicators": ["glycolysis", "Krebs cycle", "electron transport"],
+        "weight": 0.6
+      }
     ]
   }'
 ```
