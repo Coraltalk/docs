@@ -39,6 +39,21 @@ curl -X POST "https://app.coraltalk.com/api/v1/prod/vid-tickets" \
   }'
 ```
 
+## Permissions
+
+`PUT /vid-tickets/:id` and `DELETE /vid-tickets/:id` are restricted to the user who created the VidTicket. If the API key was issued to a different user — even within the same organization — those endpoints return `403 forbidden`:
+
+```json
+{
+  "error": {
+    "code": "forbidden",
+    "message": "Only the vid ticket creator can edit this vid ticket"
+  }
+}
+```
+
+`GET` and `POST` are not affected. To edit or delete a VidTicket programmatically, use an API key owned by the same user who created it.
+
 ## Student URL
 
 ```
