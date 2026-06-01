@@ -304,15 +304,23 @@ This guide covers the most common issues users encounter and how to resolve them
   
   <Accordion title="Can't upload course materials">
     **File requirements**:
-    - Accepted formats: PDF, DOCX, TXT, PPTX
-    - Maximum file size: 50MB per file
+    - Accepted formats: PDF, DOCX, DOC, PPTX, PPT, TXT
+    - Maximum file size: 25 MB per file
+    - Knowledge library total size: 20 MB across all files
     - Files must not be password-protected
-    
+    - File contents must match the file extension (renaming a `.zip` to `.pdf` is rejected)
+
+    **Common upload errors**:
+    - *"Password-protected PDFs cannot be uploaded"* — Remove the password in your PDF tool, then re-upload.
+    - *"The uploaded file is not a valid PDF"* — The file is corrupted or isn't really a PDF. Re-export from the source app.
+    - *"Adding this file would exceed the maximum knowledge library size limit of 20MB"* — Delete an existing file or upload a smaller version.
+    - *"The uploaded file failed validation"* — File type doesn't match its contents, or the format isn't supported.
+
     **If upload fails**:
-    1. Try smaller file (compress large PDFs)
-    2. Convert to PDF if using other format
-    3. Check file isn't corrupted (open it locally first)
-    4. Try different browser
+    1. Try a smaller file (compress large PDFs)
+    2. Convert to PDF if using an unsupported format
+    3. Check the file isn't corrupted (open it locally first)
+    4. Try a different browser
   </Accordion>
 </AccordionGroup>
 
