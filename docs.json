@@ -33,7 +33,10 @@
           },
           {
             "group": "Integrations",
-            "pages": ["integrations/canvas-integration"]
+            "pages": [
+              "integrations/canvas-integration",
+              "integrations/moodle-integration"
+            ]
           },
           {
             "group": "Help & Troubleshooting",
