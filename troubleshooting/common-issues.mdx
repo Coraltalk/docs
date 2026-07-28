@@ -248,6 +248,36 @@ This guide covers the most common issues users encounter and how to resolve them
   </Accordion>
 </AccordionGroup>
 
+## Moodle integration issues
+
+<AccordionGroup>
+  <Accordion title="Can't launch Coraltalk from Moodle">
+    **Check**:
+    1. Moodle External tool login / launch / JWKS URLs match your Coraltalk app URL
+    2. Teacher registered **Moodle LTI 1.3 Launch** in Coraltalk Integrations
+    3. Moodle site URL (issuer) matches exactly
+    4. Moodle tool privacy settings share launcher name and email
+    
+    See [Moodle integration guide](/integrations/moodle-integration) for setup steps
+  </Accordion>
+  
+  <Accordion title="Wrong Coraltalk class after Moodle launch">
+    Students land in the Coraltalk class that was active when Moodle LTI was registered.
+    
+    **Solution**: Open the correct class in Coraltalk → Integrations → update the Moodle LTI platform registration
+  </Accordion>
+  
+  <Accordion title="Grades not syncing to Moodle">
+    **Check**:
+    1. Moodle REST connection is active (Integrations)
+    2. Exam is linked to an existing point-graded Moodle assignment
+    3. Student is linked to a Moodle user
+    4. Web service token still has grade permission
+    
+    See [Moodle integration guide](/integrations/moodle-integration) for REST details
+  </Accordion>
+</AccordionGroup>
+
 ## Browser and performance issues
 
 <AccordionGroup>
@@ -298,8 +328,9 @@ This guide covers the most common issues users encounter and how to resolve them
     1. Have students re-join with class link
     2. Check if students are in different section/class
     3. For Canvas: verify roster sync is enabled
-    4. Wait 10 minutes for enrollment to process
-    5. Check organization settings for enrollment restrictions
+    4. For Moodle: verify REST connection and student linking
+    5. Wait 10 minutes for enrollment to process
+    6. Check organization settings for enrollment restrictions
   </Accordion>
   
   <Accordion title="Can't upload course materials">
@@ -324,6 +355,7 @@ If your issue isn't covered here:
   <Step title="Check detailed guides">
     Browse topic-specific documentation:
     - [Canvas integration](/integrations/canvas-integration)
+    - [Moodle integration](/integrations/moodle-integration)
     - [Oral assignments](/assessments/oral-assignments)
   </Step>
   

@@ -1,0 +1,351 @@
+---
+title: "Moodle LMS integration"
+description: "Connect Coraltalk with Moodle for SSO launch, roster sync, materials import, and grade push-back"
+icon: "link"
+---
+
+Coraltalk integrates with Moodle in two complementary ways:
+
+| Integration | What it does |
+|-------------|--------------|
+| **LTI 1.3 / LTI Advantage** | Launch Coraltalk from Moodle with single sign-on (no separate login) |
+| **REST web services** | Import course files, sync rosters, and push grades to existing Moodle assignments |
+
+Use **LTI** for launch/SSO and **REST** for content and grades. Most schools enable both.
+
+## Integration benefits
+
+<CardGroup cols={2}>
+  <Card title="Single sign-on" icon="right-to-bracket">
+    Teachers and students launch Coraltalk from Moodle without a second login
+  </Card>
+  
+  <Card title="Grade push-back" icon="arrow-right-arrow-left">
+    Oral assessment scores can sync to an existing point-graded Moodle assignment
+  </Card>
+  
+  <Card title="Knowledge library" icon="folder-open">
+    Import supported Moodle course files into your Coraltalk class materials
+  </Card>
+  
+  <Card title="Roster linking" icon="users">
+    Match Moodle enrollments to Coraltalk students by email, login ID, or username
+  </Card>
+</CardGroup>
+
+## Setup overview
+
+<Tabs>
+  <Tab title="LTI 1.3 (SSO launch)">
+    **Launch Coraltalk from Moodle**
+    
+    - No separate Coraltalk password for students
+    - Requires Moodle site admin to create an LTI Advantage External tool
+    - Teacher registers the Moodle site + client ID in Coraltalk Integrations
+    
+    See [LTI 1.3 setup](#lti-13-setup-moodle-admin) below.
+  </Tab>
+  
+  <Tab title="REST web services">
+    **Files, roster, and grades**
+    
+    - Teacher (or Moodle admin) creates a web service token
+    - Connect from Coraltalk **Integrations** or **Knowledge Library → Moodle**
+    - Grades push to an **existing** Moodle assignment (Coraltalk does not create new Moodle assignments)
+    
+    See [REST setup](#rest-web-services-setup) below.
+  </Tab>
+</Tabs>
+
+## Who should set this up?
+
+<AccordionGroup>
+  <Accordion title="Moodle administrators">
+    **Best for**: School-wide or multi-course deployments
+    
+    Admins create the LTI Advantage External tool and (optionally) a shared web service for REST. Teachers then register the tool in Coraltalk and connect courses.
+  </Accordion>
+  
+  <Accordion title="Individual teachers">
+    **Best for**: Pilots and single-class use
+    
+    Teachers can connect REST with a token for their enrolled courses. LTI usually still needs a Moodle admin to create the External tool once.
+  </Accordion>
+</AccordionGroup>
+
+## Prerequisites
+
+<Steps>
+  <Step title="Coraltalk teacher account">
+    Sign in at [app.coraltalk.com](https://app.coraltalk.com) and create (or open) the class students should land in.
+  </Step>
+  
+  <Step title="Moodle access">
+    Site admin access for LTI tool creation; teacher or service account for REST tokens.
+  </Step>
+  
+  <Step title="Public Coraltalk URL">
+    Your Coraltalk environment must be reachable from Moodle (production or staging). Localhost-only URLs will not work for school Moodle sites.
+  </Step>
+</Steps>
+
+## LTI 1.3 setup (Moodle admin)
+
+### Step A — Create the External tool in Moodle
+
+<Steps>
+  <Step title="Open Manage tools">
+    Go to **Site administration → Plugins → Activity modules → External tool → Manage tools**
+  </Step>
+  
+  <Step title="Configure a tool manually">
+    Choose **configure a tool manually** (LTI 1.3 / LTI Advantage).
+  </Step>
+  
+  <Step title="Enter Coraltalk URLs">
+    Replace `{BASE_URL}` with your Coraltalk app URL (for example `https://app.coraltalk.com`):
+
+    | Moodle field | Value |
+    |--------------|-------|
+    | **Tool name** | `Coraltalk` |
+    | **Tool URL** / Target link URI | `{BASE_URL}/api/lti/launch` |
+    | **LTI version** | LTI 1.3 / LTI Advantage |
+    | **Public key type** | Keyset URL |
+    | **Public keyset URL** | `{BASE_URL}/api/lti/jwks` |
+    | **Initiate login URL** | `{BASE_URL}/api/lti/login` |
+    | **Redirection URI(s)** | `{BASE_URL}/api/lti/launch` |
+  </Step>
+  
+  <Step title="Share name and email">
+    Under privacy / share launcher options, enable **name** and **email**. Coraltalk needs email to create or link accounts.
+  </Step>
+  
+  <Step title="Save and copy Client ID">
+    Save the tool and copy the **Client ID**. You will paste it into Coraltalk next.
+  </Step>
+</Steps>
+
+<Info>
+**Issuer** is your Moodle site URL exactly as Moodle sends it (for example `https://moodle.school.edu` or `https://school.edu/moodle`). Include any subdirectory.
+</Info>
+
+### Step B — Register Moodle in Coraltalk
+
+<Steps>
+  <Step title="Open the class">
+    Sign in as a teacher and open the Coraltalk class students should use.
+  </Step>
+  
+  <Step title="Open Integrations">
+    Go to **Integrations** and find **Moodle LTI 1.3 Launch**.
+  </Step>
+  
+  <Step title="Register the platform">
+    1. Copy the tool URLs if you still need them for Moodle
+    2. Click **Register Moodle platform**
+    3. Enter:
+       - **Moodle site URL (issuer)** — must match Moodle’s `iss`
+       - **Client ID** — from Moodle Step A
+    4. Save
+  </Step>
+</Steps>
+
+<Warning>
+**Which class do students see?**  
+Students who launch this Moodle tool are enrolled into the Coraltalk class that was active when the teacher registered the Moodle LTI platform. Register from the correct class first. Re-register from another class if you need to change the mapping.
+</Warning>
+
+### Step C — Add the tool to a Moodle course
+
+<Steps>
+  <Step title="Add an External tool activity">
+    In a Moodle course: **Add an activity or resource → External tool**
+  </Step>
+  
+  <Step title="Select Coraltalk">
+    Choose the preconfigured **Coraltalk** tool and save.
+  </Step>
+  
+  <Step title="Test launch">
+    Open the activity as a teacher, then as a student. Each should land in Coraltalk signed in automatically.
+  </Step>
+</Steps>
+
+## Student experience (LTI)
+
+<Steps>
+  <Step title="Open Coraltalk in Moodle">
+    Student clicks the External tool activity in their Moodle course.
+  </Step>
+  
+  <Step title="SSO handoff">
+    Moodle and Coraltalk complete an LTI 1.3 / OpenID Connect handoff. No Coraltalk password is required.
+  </Step>
+  
+  <Step title="Land in the mapped class">
+    The student is enrolled into the Coraltalk class linked to that Moodle LTI registration and sees that class home.
+  </Step>
+</Steps>
+
+<Info>
+Launch opens Coraltalk in a full browser page (it breaks out of the Moodle iframe), same as Canvas LTI.
+</Info>
+
+## REST web services setup
+
+Use REST for course files, roster matching, and grade push-back.
+
+### Moodle admin checklist
+
+<Steps>
+  <Step title="Enable web services">
+    **Site administration → Advanced features**: enable **Web services** and **REST protocol**.
+  </Step>
+  
+  <Step title="Create an external service">
+    **Site administration → Server → Web services → External services**
+    
+    1. Add a custom service (for example `Coraltalk`)
+    2. Optionally enable **Authorized users only**
+    3. Add the required functions below
+  </Step>
+  
+  <Step title="Required functions">
+    | Function | Purpose |
+    |----------|---------|
+    | `core_webservice_get_site_info` | Validate token and list functions |
+    | `core_enrol_get_users_courses` | List courses for the token user |
+    | `core_course_get_contents` | List course files for import |
+    | `core_enrol_get_enrolled_users` | Roster for student matching |
+    | `mod_assign_get_assignments` | List assignments when linking an exam |
+    | `mod_assign_save_grade` | Push grades to Moodle |
+
+    Optional for faster bulk grade sync: `mod_assign_save_grades`
+  </Step>
+  
+  <Step title="Create a dedicated Moodle user">
+    Use a teacher or service account enrolled in the courses you want to sync, with permission to view content and grade assignments.
+  </Step>
+  
+  <Step title="Generate a token">
+    **Site administration → Server → Web services → Manage tokens**
+    
+    Select the user and external service, generate the token, and copy it once (Moodle will not show it again).
+  </Step>
+</Steps>
+
+Give the teacher:
+
+- **Moodle base URL** (include subdirectory if needed)
+- **Token**
+
+### Connect in Coraltalk (teachers)
+
+<Steps>
+  <Step title="Open Integrations or Knowledge Library">
+    In your class: **Integrations → Connect with Moodle**, or **Customize → Knowledge Library → Moodle**.
+  </Step>
+  
+  <Step title="Paste URL and token">
+    Enter the Moodle site URL and web service token, then connect.
+  </Step>
+  
+  <Step title="Link a course">
+    Choose the Moodle course for this Coraltalk class.
+  </Step>
+  
+  <Step title="Sync roster and materials">
+    Match students and import supported files (PDF, DOCX, PPTX, TXT, DOC).
+  </Step>
+  
+  <Step title="Link grades (optional)">
+    Link an oral exam to an **existing point-graded** Moodle assignment, then push grades manually, in bulk, or automatically after evaluation.
+  </Step>
+</Steps>
+
+<Warning>
+Moodle REST integration does **not** create new Moodle assignments. Select an existing assignment that uses point grading.
+</Warning>
+
+## Grade sync behavior (REST)
+
+| Event | Moodle update |
+|-------|----------------|
+| Teacher links exam to Moodle assignment | Assignment selected in Coraltalk |
+| Evaluation completes (if auto-sync on) | Grade pushed to the linked assignment |
+| Manual / bulk sync | Grades written via Moodle web services |
+
+LTI Assignment and Grade Services (AGS) are not used for Moodle today — use REST for grades.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Students can't launch from Moodle">
+    **Check**:
+    1. Moodle External tool URLs match your Coraltalk `{BASE_URL}`
+    2. Platform is registered under **Integrations → Moodle LTI 1.3 Launch**
+    3. Issuer (Moodle site URL) matches exactly what Moodle sends
+    4. Share launcher **name** and **email** are enabled on the Moodle tool
+    5. Student is enrolled in the Moodle course
+    
+    **Solution**: Launch as the teacher first. If that works, verify student enrollment and privacy settings.
+  </Accordion>
+  
+  <Accordion title="Wrong Coraltalk class after launch">
+    Students land in the class that was active when Moodle LTI was registered.
+    
+    **Solution**: Open the correct Coraltalk class → Integrations → re-register / update the Moodle LTI platform so `default` mapping points at that class.
+  </Accordion>
+  
+  <Accordion title="Missing required web service functions">
+    The Moodle external service is missing one of the required REST functions listed above.
+    
+    **Solution**: Edit the external service in Moodle and add every required function, then reconnect in Coraltalk.
+  </Accordion>
+  
+  <Accordion title="Grades not syncing to Moodle">
+    **Check**:
+    1. REST Moodle connection is active for the class
+    2. Exam is linked to an existing **point-graded** Moodle assignment
+    3. Student is linked to a Moodle user ID
+    4. Token user can grade the assignment
+    
+    **Solution**: Use manual grade sync from Coraltalk, then fix linking if some students fail.
+  </Accordion>
+  
+  <Accordion title="Invalid or expired Moodle token">
+    Token was revoked, regenerated, or belongs to a different service/user.
+    
+    **Solution**: Generate a new token in Moodle and reconnect in Coraltalk.
+  </Accordion>
+</AccordionGroup>
+
+## Support
+
+<Card title="Need help with Moodle integration?" icon="life-ring">
+  Contact **support@coraltalk.com** with:
+  - Your Moodle site URL
+  - School name
+  - Whether you are setting up LTI, REST, or both
+  - Error messages or screenshots
+</Card>
+
+## Related guides
+
+<CardGroup cols={2}>
+  <Card title="Canvas integration" icon="link" href="/integrations/canvas-integration">
+    Canvas LTI and REST setup
+  </Card>
+  
+  <Card title="Troubleshooting" icon="wrench" href="/troubleshooting/common-issues">
+    Common issues and fixes
+  </Card>
+  
+  <Card title="For teachers" icon="chalkboard-user" href="/getting-started/for-teachers">
+    Teacher onboarding guide
+  </Card>
+  
+  <Card title="Oral assignments" icon="microphone" href="/assessments/oral-assignments">
+    Create and manage oral assessments
+  </Card>
+</CardGroup>
