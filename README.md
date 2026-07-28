@@ -29,13 +29,14 @@ mint dev
 ### Assessments (1 page)
 - **assessments/oral-assignments.mdx** — Create and manage AI-evaluated oral assessments
 
-### Integrations (1 page)
+### Integrations (2 pages)
 - **integrations/canvas-integration.mdx** — Canvas LMS LTI 1.3 setup
+- **integrations/moodle-integration.mdx** — Moodle LTI 1.3 SSO + REST setup
 
 ### Help (1 page)
 - **troubleshooting/common-issues.mdx** — Comprehensive troubleshooting guide
 
-## Total: 9 Pages
+## Total: 10 Pages
 
 All pages include:
 - Rich Mintlify components (Steps, Accordions, Tabs, Cards)
