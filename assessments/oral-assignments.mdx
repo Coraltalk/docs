@@ -63,25 +63,72 @@ Coraltalk can generate questions based on your uploaded course materials:
 3. Review and customize the generated questions
 4. Add your own questions as needed
 
+## Choose an evaluation strategy
+
+In **Step 4 — Curriculum Settings**, pick how Coral should assess student responses. **AI Rubric** is selected by default and is the recommended option for most assignments.
+
+| Strategy | When to use it |
+|----------|----------------|
+| **AI Rubric** *(default, automated)* | Let Coral score each response against a structured rubric you import or pick from saved standards. Best for criteria-based grading at scale. |
+| **Model Answer** *(semi-automated)* | Compare student responses against an ideal answer you provide or generate with AI. Best when there is a clear "correct" answer. |
+| **Manual** | Skip AI scoring and grade submissions yourself. Best for high-stakes or unusual assessments. |
+
+<Tip>
+You can change the strategy later from the assignment settings. Personalized exams always use AI Rubric.
+</Tip>
+
 ## Define your rubric
 
-Your rubric tells Coral how to evaluate student responses:
+Your rubric tells Coral how to evaluate student responses. You can either import a rubric from a CSV template or select standards you have already configured in Coral.
 
-<Accordion title="Rubric structure">
-  - **Criteria name** — What you're evaluating (e.g., "Conceptual understanding", "Use of examples")
-  - **Point value** — How many points this criterion is worth
-  - **Description** — What makes a good response for this criterion
-</Accordion>
+### Import a rubric (CSV)
+
+<Steps>
+  <Step title="Download the template">
+    From the **Curriculum Standards** panel, select **Start from a template** to download `import_rubric_template.csv`.
+  </Step>
+
+  <Step title="Fill in your dimensions and rating levels">
+    Each row is one **dimension** (criterion). Each column after the first is one **rating level**, with the point value in parentheses.
+  </Step>
+
+  <Step title="Upload the file">
+    Drop the completed CSV into the **Drop your rubric here** area, or click to browse. Only `.csv` files are accepted.
+  </Step>
+
+  <Step title="Review the parsed rubric">
+    Coral renders your CSV as an editable table. Adjust dimensions, ratings, and point values inline before saving.
+  </Step>
+</Steps>
+
+#### CSV format
+
+The first column is the dimension name. Every following column header takes the form `Level name (points)`, where `points` is a number on the **1–10 scale**.
+
+```csv import_rubric_template.csv
+Dimension,Capstone (10),Milestone (7),Developing (4),Benchmark (1)
+Clarity of Communication,"Explanations are precise, coherent, and highly understandable.","Explanations are generally clear with only minor ambiguity.","Explanations are partially understandable but lack clarity.","Explanations are unclear or difficult to follow."
+Organization of Thought,"Ideas are logically sequenced and connected throughout.","Responses are mostly organized with logical progression.","Responses show inconsistent organization or fragmented ideas.","Responses appear disorganized or lack meaningful structure."
+Reasoning & Problem Solving,"Demonstrates nuanced reasoning and thoughtful consideration of alternatives.","Provides reasonable support for conclusions.","Reasoning is simplistic or only partially supported.","Conclusions lack meaningful justification."
+```
+
+<Info>
+Rubric points use a **1–10 scale** that matches the scores Coral generates. As a guideline for a 4-level rubric, Capstone sits around **7.5–10** and Benchmark around **1–2.5**.
+</Info>
+
+### Use saved standards
+
+If you have already configured curriculum standards for your class, select **Use saved standards** to attach them instead of uploading a CSV. If no standards are configured yet, set them up in **Settings** first — you can still import a CSV in the meantime.
 
 <Accordion title="Best practices">
-  - Use 3-5 criteria per assignment
-  - Make criteria specific and measurable
-  - Include point ranges (e.g., 0-4 points per criterion)
-  - Align with your course learning objectives
+  - Use 3–6 dimensions per assignment
+  - Make dimension descriptions specific and measurable
+  - Provide a description for every rating level so Coral can distinguish between them
+  - Align dimensions with your course learning objectives
 </Accordion>
 
 <Warning>
-Be specific in your rubric descriptions. Coral evaluates based on what you define, so clear criteria lead to more accurate grading.
+Be specific in your rating descriptions. Coral evaluates based on what you define, so clear criteria lead to more accurate grading.
 </Warning>
 
 ## Share with students
