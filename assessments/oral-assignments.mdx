@@ -131,6 +131,71 @@ While Coral provides initial evaluation:
 Your adjustments help improve Coral's future evaluations. The AI learns from your patterns over time.
 </Info>
 
+## Re-evaluate existing submissions
+
+When you change a published assignment's questions, rubric, or evaluation criteria, existing student submissions still carry their original scores. Use **re-evaluation** to re-grade those past submissions against your updated criteria — no need to ask students to re-record.
+
+### When to use it
+
+<CardGroup cols={2}>
+  <Card title="You refined the rubric" icon="list-check">
+    Tightened criteria descriptions or adjusted point values after seeing the first wave of submissions
+  </Card>
+
+  <Card title="You fixed a question" icon="pen-to-square">
+    Corrected wording, added context, or replaced a question students misinterpreted
+  </Card>
+
+  <Card title="You added a criterion" icon="plus">
+    Introduced a new evaluation dimension that should apply to everyone fairly
+  </Card>
+
+  <Card title="You want consistent grading" icon="scale-balanced">
+    Ensure every student is graded against the exact same final rubric
+  </Card>
+</CardGroup>
+
+### How to re-run evaluations
+
+<Steps>
+  <Step title="Edit a published assignment">
+    Open the assignment and select **Edit**. Make your changes to questions, rubric, or evaluation settings.
+  </Step>
+
+  <Step title="Reach the final step">
+    Continue to the last step of the editor (**Evaluation Setup**).
+  </Step>
+
+  <Step title="Enable re-evaluation">
+    Select the checkbox **Re-run evaluation for previously submitted videos using the updated criteria**.
+
+    <Info>
+    This checkbox only appears when editing an already-published assignment.
+    </Info>
+  </Step>
+
+  <Step title="Save the assignment">
+    Select **Update**. Coral queues every existing submission for re-evaluation in the background.
+  </Step>
+</Steps>
+
+### Track progress
+
+While re-evaluation is running, a pulsing yellow indicator appears next to the assignment in your oral assignments list.
+
+- **Desktop** — hover the indicator to see live progress (for example, *8 of 24 evaluations complete*) and any failures.
+- **Mobile** — tap the indicator to open the same status panel.
+
+The indicator disappears automatically once every submission has finished re-evaluating. Updated scores and feedback replace the previous results, and students see the new evaluation the next time they open their submission (subject to your visibility settings).
+
+<Warning>
+Re-evaluation overwrites the existing AI evaluation for each submission, including any manual score adjustments you made. Export grades first if you want to keep a record of the previous results.
+</Warning>
+
+<Tip>
+For small wording fixes you don't want reflected in scores, skip the checkbox — your changes still apply to future submissions, but past grades stay untouched.
+</Tip>
+
 ## Student visibility settings
 
 Control what students see using **Settings** on the oral assignments list:
